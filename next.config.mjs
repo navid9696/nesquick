@@ -1,10 +1,14 @@
-import million from 'million/compiler'
-
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-const millionConfig = {
-	auto: true,
+const nextConfig = {
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'image.tmdb.org',
+				pathname: '**',
+			},
+		],
+	},
 }
 
-export default million.next(nextConfig, millionConfig)
+export default nextConfig

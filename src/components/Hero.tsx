@@ -1,29 +1,25 @@
+'use client'
 import Image from 'next/image'
-import { fetchTrending } from '../../actions/movieData'
-import { IMovie } from '../../lib/types'
 import { baseImgUrl } from '../../lib/constants'
+import { IMovie } from '../../lib/types'
 
-const getRandomItem = (array: []) => {
-	const randomNumber = Math.floor(Math.random() * array.length)
-	return array[randomNumber]
-}
-
-const Hero = async () => {
-	const [trendingMovies, trendingSeries] = await Promise.all([fetchTrending('movie'), fetchTrending('tv')])
-
-	const trendingMovie: IMovie = getRandomItem(trendingMovies)
-	const trendingShow: IMovie = getRandomItem(trendingSeries)
-
-	const trendingData = {
-		trendingMovie: trendingMovie,
-		trendingShow: trendingShow,
-		trendingMovies: trendingMovies,
-		trendingSeries: trendingSeries,
-	}
+const Hero = ({ urlCategory }: { urlCategory: IMovie }) => {
 	return (
-		<div>
-			<div>
-				<Image alt='poster' width={100} height={100} src={`${baseImgUrl}`} />
+		<div className='flex flex-col px-10 pt-20 gap-10 max-w-xl'>
+			<div className='absolute top-0 left-0 -z-10 h-screen w-screen'>
+				<Image
+					className='object-cover h-full w-full md:hidden'
+					alt='poster'
+					fill
+					src={`${baseImgUrl}${urlCategory?.poster_path}`}
+				/>
+				<Image
+					className='object-cover h-full w-full hidden md:block'
+					alt='poster'
+					fill
+					src={`${baseImgUrl}${urlCategory?.backdrop_path}`}
+				/>
+				<div className='absolute inset-0 bg-gradient-to-b bg-gradient from-black via-transparent to-black'></div>
 			</div>
 		</div>
 	)

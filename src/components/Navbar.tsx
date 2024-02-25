@@ -24,7 +24,7 @@ const Navbar = () => {
 
 	return (
 		<NextUIProvider>
-			<nav className='px-2 py-1 sm:px-12 sm:py-6 flex text-slate-50'>
+			<nav className='sticky top-0 z-50 px-2 py-1 sm:px-12 sm:py-6 flex text-slate-50'>
 				<div className='flex flex-1 items-center'>
 					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
 						<DropdownTrigger>

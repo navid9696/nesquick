@@ -23,8 +23,8 @@ const Navbar = () => {
 	}
 
 	return (
-		<NextUIProvider>
-			<nav className='sticky top-0 z-50 px-2 py-1 sm:px-12 sm:py-6 flex text-slate-50'>
+		<NextUIProvider className='sticky top-0'>
+			<nav className='z-50 px-2 py-1 sm:px-12 sm:py-6 flex text-slate-50'>
 				<div className='flex flex-1 items-center'>
 					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
 						<DropdownTrigger>
@@ -51,10 +51,29 @@ const Navbar = () => {
 					<Link href={'/'}>
 						<Image priority src={'/assets/logo.png'} alt='logo' height={50} width={150} />
 					</Link>
+
+					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
+						<DropdownTrigger>
+							<Button
+								disableRipple
+								className='ml-5 sm:block hidden text-slate-50 bg-transparent'
+								onClick={() => handleMenuClick('category')}>
+								Browse {categoryOpen ? <ArrowDropDown /> : <ArrowLeft />}
+							</Button>
+						</DropdownTrigger>
+						<DropdownMenu aria-label='Static Actions'>
+							<DropdownItem key='search'>
+								<Link href={'/series'}>Series</Link>
+							</DropdownItem>
+							<DropdownItem key='favorite'>
+								<Link href={'/movies'}>Movies</Link>
+							</DropdownItem>
+						</DropdownMenu>
+					</Dropdown>
 				</div>
 				<div className='flex sm:flex-initial w-[50%] md:w-[45%] lg:w-[35%] xl:w-[25%] 2xl:w-[20%] justify-between items-center'>
 					<Link className='p-2 hidden sm:flex' href={'/search'}>
-						<Button className='mr-2 flex flex-1 items-center ' isIconOnly aria-label='Search'>
+						<Button className='mr-2 flex flex-1 items-center ' color='primary' isIconOnly aria-label='Search'>
 							<SearchOutlined sx={{ fontSize: 40 }} />
 						</Button>
 					</Link>

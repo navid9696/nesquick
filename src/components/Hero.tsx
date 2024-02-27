@@ -1,11 +1,22 @@
 'use client'
 import Image from 'next/image'
 import { baseImgUrl } from '../../lib/constants'
-import { IMovie } from '../../lib/types'
+import { IGenres, IMovie } from '../../lib/types'
 import { Button, NextUIProvider } from '@nextui-org/react'
 import { InfoRounded, PlayArrowOutlined } from '@mui/icons-material'
 
-const Hero = ({ urlCategory }: { urlCategory: IMovie }) => {
+interface HeroProps {
+	urlCategory: IMovie
+	genres: IGenres[]
+}
+
+const Hero = ({ urlCategory, genres }: HeroProps) => {
+	const genreNames = urlCategory?.genre_ids
+		.map(genreId => {
+			const genre = genres.find(genre => genre.id === genreId)
+			return genre ? genre.name : ''
+		})
+		.join(' | ')
 	return (
 		<NextUIProvider>
 			<div className='h-screen -mt-[180px] sm:mt-0 flex flex-col justify-end sm:justify-start  items-center sm:items-start px-10 pt-20 gap-10 max-w-2xl'>
@@ -24,15 +35,17 @@ const Hero = ({ urlCategory }: { urlCategory: IMovie }) => {
 					/>
 					<div className='absolute inset-0 bg-gradient-to-b bg-gradient from-black via-transparent to-black'></div>
 				</div>
-				<h1 className='font-bold text-4xl sm:text-5xl text-slate-50'>{urlCategory?.title || urlCategory?.name}</h1>
+				<h1 className='whitespace-nowrap font-bold text-5xl sm:text-6xl text-slate-50'>{urlCategory?.title || urlCategory?.name}</h1>
 				<p className='hidden sm:block text-white'>{urlCategory?.overview}</p>
+				<p className='sm:hidden text-white'>{genreNames}</p>
+
 				<div className='flex gap-8'>
-					<Button className='bg-red-700'>
-						<PlayArrowOutlined sx={{ fontSize: 40 }} />
+					<Button className='bg-red-700 font-extrabold'>
+						<PlayArrowOutlined sx={{ fontSize: 44 }} />
 						Play
 					</Button>
 					<Button>
-						<InfoRounded />
+						<InfoRounded /><span className='sm:block hidden font-extrabold'>More Info</span><span className='sm:hidden font-extrabold'>Info</span>
 					</Button>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 import Hero from '@components/Hero'
 import Navbar from '@components/Navbar'
 import { fetchGenres, fetchTrending } from '../../../actions/movieData'
-import { IGenres } from '../../../lib/types'
+import MovieRow from '@components/MovieRow'
 
 const Home = async () => {
 	const trendingMovies = await fetchTrending('movie')
@@ -17,8 +17,9 @@ const Home = async () => {
 	return (
 		<>
 			<Navbar />
-
 			<Hero urlCategory={trendingShow} genres={allGenres} />
+			<MovieRow title={'Movies'} movies={trendingMovies} />
+			<MovieRow title={'Series'} movies={trendingTv} />
 		</>
 	)
 }

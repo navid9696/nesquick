@@ -15,8 +15,8 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html className='bg-gray-950 scrollbar-hide' lang='en'>
-			<body className={`${inter.className} overflow-x-hidden `}>{children}</body>
+		<html className='bg-black scrollbar-hide ' lang='en'>
+			<body className={`${inter.className} scroll-smooth`}>{children}</body>
 		</html>
 	)
 }

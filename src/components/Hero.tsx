@@ -43,11 +43,11 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 					<p className='text-center sm:hidden text-white'>{genreNames}</p>
 
 					<div className='flex gap-8'>
-						<Button className='bg-[#DD202D] font-extrabold'>
+						<Button className='bg-[#DD202D] font-extrabold border-2 border-solid border-black'>
 							<PlayArrowOutlined sx={{ fontSize: 44 }} />
 							Play
 						</Button>
-						<Button>
+						<Button className='border-2 border-solid border-black'>
 							<InfoRounded />
 							<span className='sm:block hidden font-extrabold'>More Info</span>
 							<span className='sm:hidden font-extrabold'>Info</span>

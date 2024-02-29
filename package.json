@@ -25,6 +25,7 @@
 		"react-dom": "^18",
 		"react-hook-form": "^7.50.1",
 		"react-hot-toast": "^2.4.1",
+		"react-indiana-drag-scroll": "^2.2.0",
 		"tailwind-scrollbar-hide": "^1.1.7"
 	},
 	"devDependencies": {

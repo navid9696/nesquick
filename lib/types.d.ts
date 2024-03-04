@@ -22,3 +22,8 @@ export interface IGenres {
 	name:string
 	
 }
+
+export interface ITrailers {
+	id:string
+	type:string
+}

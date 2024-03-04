@@ -2,31 +2,61 @@
 import React, { Component } from 'react'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import MovieCard from './MovieCard'
-import { IMovie } from '../../lib/types'
+import { IGenres, IMovie } from '../../lib/types'
 
 interface Props {
 	title: string
 	movies: IMovie[]
+	genres?: IGenres[]
 }
 
-class MovieRow extends Component<Props> {
+interface State {
+	isScrolled: boolean
+}
+
+class MovieRow extends Component<Props, State> {
+	genreName?: string
+
+	constructor(props: Props) {
+		super(props)
+		this.state = {
+			isScrolled: false,
+		}
+	}
+
+	onScroll = () => {
+		if (!this.state.isScrolled) {
+			this.setState({ isScrolled: true })
+		}
+	}
+
+	onEndScroll = () => {
+		if (this.state.isScrolled) {
+			this.setState({ isScrolled: false })
+		}
+	}
+
 	render() {
-		const { title, movies } = this.props
+		const { title, movies, genres } = this.props
+
 		return (
-			<div className='ml-20 mr-20 mb-20 text-slate-50 '>
-				<h2 className='text-2xl'>{title}</h2>
-				<div className='relative'>
-					<div className='absolute z-50 inset-y-0 left-0 w-4 bg-gradient-to-l from-transparent to-black'></div>
+			<div className='mx-5 sm:mx-10 mb-10 text-slate-50 '>
+				<h2 className='pl-10 text-2xl font-bold'>{title}</h2>
+				<div className='relative '>
+					<div className='absolute z-40 inset-y-0 left-0 w-4 bg-gradient-to-l from-transparent to-black'></div>
 					<ScrollContainer
-						draggingClassName='cursor-grabbing'
-						className='pl-1 hover:cursor-grab scroll-container relative'>
-						<div className='flex gap-5'>
+						onEndScroll={this.onEndScroll}
+						onStartScroll={this.onScroll}
+						className={`${
+							this.state.isScrolled ? 'cursor-grabbing' : 'cursor-grab'
+						}   px-10 scroll-container relative`}>
+						<div className='flex  gap-3 sm:gap-5'>
 							{movies.map(movie => (
 								<MovieCard key={movie.id} movie={movie} />
 							))}
 						</div>
 					</ScrollContainer>
-					<div className='absolute  z-50 inset-y-0 right-0 w-4 bg-gradient-to-r from-transparent to-black'></div>
+					<div className='absolute z-40 inset-y-0 right-0 w-4 bg-gradient-to-r from-transparent to-black'></div>
 				</div>
 			</div>
 		)

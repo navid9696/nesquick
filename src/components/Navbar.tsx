@@ -33,8 +33,8 @@ const Navbar = () => {
 
 	return (
 		<NextUIProvider
-			className={`sticky top-0 z-20 ${!top && ` bg-gradient-to-b bg-gradient  from-black/85  from-85%  `}`}>
-			<nav className='z-50 px-2 py-1 sm:px-12 sm:py-6 flex text-slate-50'>
+			className={`sticky top-0 z-50 ${!top && ` bg-gradient-to-b bg-gradient  from-black/85  from-85%  `}`}>
+			<nav className=' px-2 py-1 sm:px-12 sm:py-6 flex text-slate-50'>
 				<div className='flex flex-1 items-center'>
 					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
 						<DropdownTrigger>
@@ -101,7 +101,7 @@ const Navbar = () => {
 						<DropdownTrigger>
 							<Button
 								disableRipple
-								className='flex items-center ml-auto sm:ml-0 font-semibold text-slate-50 bg-transparent'
+								className=' ml-auto sm:ml-0 font-semibold text-slate-50 bg-transparent'
 								onClick={() => handleMenuClick('user')}>
 								<Image className='p-1 rounded-2xl ' src={'/assets/profile.png'} alt='profile' height={50} width={50} />
 								User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}

@@ -19,3 +19,10 @@ export const fetchGenres = async (category: string) => {
 
 	return genres
 }
+
+export const fetchTrailers = async (category: string, movieId: number) => {
+	const data = await getApiResponse(`/${category}/${movieId}/videos`)
+	const trailers = data.results
+
+	return trailers
+}

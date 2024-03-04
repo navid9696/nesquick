@@ -35,7 +35,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 					/>
 					<div className='absolute inset-0 bg-gradient-to-b bg-gradient from-black via-transparent to-black'></div>
 				</div>
-				<div className=' flex flex-col  items-center sm:items-start px-10 pb-28 sm:pt-28 gap-5 sm:gap-12 max-w-2xl'>
+				<div className='flex flex-col items-center sm:items-start px-10 pb-28 sm:pt-44 gap-5 sm:gap-12 max-w-2xl'>
 					<h1 className='text-center font-bold text-4xl sm:text-5xl text-slate-50'>
 						{urlCategory?.title || urlCategory?.name}
 					</h1>

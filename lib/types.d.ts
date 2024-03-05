@@ -20,6 +20,8 @@ export interface IMovie {
 export interface IGenres {
 	id:number
 	name:string
+	movies:IMovie[]
+	
 	
 }
 

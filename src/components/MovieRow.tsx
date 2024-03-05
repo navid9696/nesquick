@@ -7,7 +7,6 @@ import { IGenres, IMovie } from '../../lib/types'
 interface Props {
 	title: string
 	movies: IMovie[]
-	genres?: IGenres[]
 }
 
 interface State {
@@ -15,8 +14,6 @@ interface State {
 }
 
 class MovieRow extends Component<Props, State> {
-	genreName?: string
-
 	constructor(props: Props) {
 		super(props)
 		this.state = {
@@ -37,11 +34,11 @@ class MovieRow extends Component<Props, State> {
 	}
 
 	render() {
-		const { title, movies, genres } = this.props
+		const { title, movies } = this.props
 
 		return (
 			<div className='mx-5 sm:mx-10 mb-10 text-slate-50 '>
-				<h2 className='pl-10 text-2xl font-bold'>{title}</h2>
+				<h2 className='pl-10 text-2xl sm:text-3xl font-bold'>{title}</h2>
 				<div className='relative '>
 					<div className='absolute z-40 inset-y-0 left-0 w-4 bg-gradient-to-l from-transparent to-black'></div>
 					<ScrollContainer

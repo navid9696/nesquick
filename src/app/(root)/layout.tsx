@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html className='bg-black scrollbar-hide scroll-smooth ' style={{ scrollBehavior: 'smooth' }} lang='en'>
-			<body id='top' className={`${inter.className} scroll-smooth `} style={{ scrollBehavior: 'smooth' }}>
+			<body id='top' className={`${inter.className} `}>
 				{children}
 			</body>
 		</html>

@@ -12,8 +12,10 @@ export const fetchGenres = async (category: string) => {
 	const genres = data.genres
 
 	for (const genre of genres) {
-		const data = await getApiResponse(`/discover/movie?with_genres=${genre.id}`)
-		// Add movies array to genre object --> For examples: genre = { id: 28, name: 'Action', movies: [ ... ]},
+		const data = await getApiResponse(
+			`/discover/${category}?with_genres=${genre.id}&include_adult=true&sort_by=popularity.desc`
+		)
+
 		genre.movies = data.results
 	}
 

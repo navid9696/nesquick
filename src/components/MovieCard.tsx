@@ -8,21 +8,19 @@ import { fetchTrailers } from '../../actions/movieData'
 const MovieCard = ({ movie }: { movie: IMovie }) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
-	
-
-	
-
 	return (
 		<>
-			<div className='relative min-w-[194px] h-72 my-10 cursor-pointer' onClick={onOpen}>
-				<Image
-					className='object-contain rounded-lg transition  hover:scale-105 hover:outline hover:outline-white hover:outline-3 '
-					alt='poster'
-					width={200}
-					height={0}
-					src={`${baseImgUrl}${movie?.poster_path}`}
-				/>
-			</div>{' '}
+			{movie.poster_path && (
+				<div className='relative min-w-[194px] h-72 my-10 cursor-pointer' onClick={onOpen}>
+					<Image
+						className='h-full w-full rounded-lg transition hover:scale-105 hover:outline hover:outline-white hover:outline-3 '
+						alt='poster'
+						width={200}
+						height={0}
+						src={`${baseImgUrl}${movie?.poster_path}`}
+					/>
+				</div>
+			)}
 			<Modal placement='top-center' backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
 				<ModalContent>
 					{onClose => (

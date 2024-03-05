@@ -59,7 +59,7 @@ const Navbar = () => {
 					</Dropdown>
 
 					<Link href={'#top'}>
-						<Image priority src={'/assets/logo.png'} alt='logo' height={50} width={150} />
+						<Image  src={'/assets/logo.png'} alt='logo' height={0} width={150} />
 					</Link>
 
 					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>

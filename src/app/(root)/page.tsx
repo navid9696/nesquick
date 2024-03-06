@@ -2,7 +2,9 @@ import Hero from '@components/Hero'
 import Navbar from '@components/Navbar'
 import { fetchGenres, fetchTrending } from '../../../actions/movieData'
 import MovieRow from '@components/MovieRow'
-import { IGenres } from '../../../lib/types'
+import Footer from '@components/Footer'
+import ArrowUp from '@components/ArrowUp'
+import { NextUIProvider } from '@nextui-org/react'
 
 const Home = async () => {
 	const trendingMovies = await fetchTrending('movie')
@@ -16,15 +18,14 @@ const Home = async () => {
 	const allGenres = [...genresTv, ...genresMovies]
 
 	return (
-		<>
+		<NextUIProvider>
 			<Navbar />
 			<Hero urlCategory={trendingShow} genres={allGenres} />
-			<MovieRow title={'Movies'} movies={trendingMovies} />
-			<MovieRow title={'Series'} movies={trendingTv} />
-			{/* {genresTv.map((genre: IGenres) => (
-				<MovieRow key={genre?.id} title={genre?.name} movies={genre?.movies} />
-			))} */}
-		</>
+			<MovieRow title={'Movies'} movies={trendingMovies} genres={genresMovies} />
+			<MovieRow title={'Series'} movies={trendingTv} genres={genresTv} />
+			<ArrowUp />
+			<Footer />
+		</NextUIProvider>
 	)
 }
 

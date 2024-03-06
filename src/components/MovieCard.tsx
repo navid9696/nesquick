@@ -1,13 +1,23 @@
-import React from 'react'
-import { IMovie } from '../../lib/types'
+import { IGenres, IMovie } from '../../lib/types'
 import { baseImgUrl } from '../../lib/constants'
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
 import Image from 'next/image'
-import { fetchTrailers } from '../../actions/movieData'
+import { fetchGenres, fetchTrailers } from '../../actions/movieData'
+import { YouTubeEmbed } from '@next/third-parties/google'
 
-const MovieCard = ({ movie }: { movie: IMovie }) => {
+interface Props {
+	movie: IMovie
+	genres: IGenres[]
+}
+
+const MovieCard = ({ movie, genres }: Props) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
-
+	const genreNames = movie?.genre_ids
+		.map(genreId => {
+			const genre = genres.find(genre => genre.id === genreId)
+			return genre ? genre.name : ''
+		})
+		.join(' | ')
 	return (
 		<>
 			{movie.poster_path && (
@@ -21,29 +31,47 @@ const MovieCard = ({ movie }: { movie: IMovie }) => {
 					/>
 				</div>
 			)}
-			<Modal placement='top-center' backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
-				<ModalContent>
+			<Modal
+				className='pb-3 z-50 xl:self-center'
+				hideCloseButton
+				placement='bottom-center'
+				scrollBehavior='outside'
+				backdrop='blur'
+				isOpen={isOpen}
+				onOpenChange={onOpenChange}>
+				<ModalContent className='bg-black '>
 					{onClose => (
 						<>
-							<ModalHeader className='flex flex-col gap-1'>{movie?.title || movie?.name}</ModalHeader>
 							<ModalBody>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-									venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-									venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-								</p>
-								<p>
-									Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor adipisicing. Mollit
-									dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris
-									do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur proident Lorem
-									eiusmod et. Culpa deserunt nostrud ad veniam.
-								</p>
+								<div className='mt-3 overflow-hidden '>
+									<YouTubeEmbed
+										videoid='e1k1PC0TtmE'
+										params='autoplay=1&disablekb=1&controls=0&iv_load_policy=0&loop=1&rel=0&cc_load_policy=0'
+									/>
+								</div>
+								<div>
+									<p className='mt-2 text-zinc-100 font-extrabold'>
+										Name:<span className='ml-2 text-zinc-200 font-semibold'>{movie?.title || movie?.name}</span>
+									</p>
+									<p className='mt-2 text-zinc-100 font-extrabold'>
+										Release Date:
+										<span className='ml-2 text-red-200 font-semibold'>
+											{movie?.release_date}tu powinna być data ale się nie wyświetla{' '}
+										</span>
+									</p>
+									<p className='mt-2 text-sm text-zinc-200 ml-2'>{movie?.overview}</p>
+
+									<p className='mt-2 text-zinc-100 font-extrabold'>
+										Rating:<span className='ml-2 text-zinc-200 font-semibold'>{movie?.vote_average.toFixed(1)}</span>
+									</p>
+									<p className='mt-2 text-zinc-100 font-extrabold'>
+										Genres:
+										<span className='ml-2 text-zinc-200 font-semibold'>{genreNames}</span>
+									</p>
+								</div>
 							</ModalBody>
 							<ModalFooter>
-								<Button color='danger' variant='light' onPress={onClose}>
+								<Button color='danger' variant='ghost' onPress={onClose}>
 									Close
 								</Button>
 							</ModalFooter>

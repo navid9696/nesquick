@@ -3,7 +3,7 @@ export interface IMovie {
 	backdrop_path: string
 	id: number
 	title: string
-	name:string
+	name: string
 	original_language: string
 	original_title: string
 	overview: string
@@ -18,14 +18,12 @@ export interface IMovie {
 }
 
 export interface IGenres {
-	id:number
-	name:string
-	movies:IMovie[]
-	
-	
+	id: number
+	name: string
+	movies: IMovie[]
 }
 
 export interface ITrailers {
-	id:string
-	type:string
+	id: string
+	type: string
 }

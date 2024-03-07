@@ -1,17 +1,19 @@
+'use client'
 import { IGenres, IMovie } from '../../lib/types'
 import { baseImgUrl } from '../../lib/constants'
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
 import Image from 'next/image'
 import { fetchGenres, fetchTrailers } from '../../actions/movieData'
-import { YouTubeEmbed } from '@next/third-parties/google'
 import YTEmbed from './YTEmbed'
+
 
 interface Props {
 	movie: IMovie
 	genres: IGenres[]
+	type:string
 }
 
-const MovieCard = ({ movie, genres }: Props) => {
+const MovieCard = ({ movie, genres,type }: Props) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const genreNames = movie?.genre_ids
 		.map(genreId => {
@@ -45,7 +47,7 @@ const MovieCard = ({ movie, genres }: Props) => {
 						<>
 							<ModalBody>
 								<div className='mt-3 overflow-hidden '>
-									<YTEmbed />
+									<YTEmbed movieId={movie.id} category={type}  />
 								</div>
 								<div>
 									<p className='mt-2 text-zinc-100 font-extrabold'>

@@ -45,7 +45,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 				<p className='text-center sm:hidden text-white'>{genreNames}</p>
 
 				<div className='flex gap-8'>
-					<Button onClick={onOpen} className='bg-[#DD202D] font-extrabold border-2 border-solid border-black'>
+					<Button onClick={onOpen} className='bg-[#DE1F2D] font-extrabold border-2 border-solid border-black'>
 						<PlayArrowOutlined sx={{ fontSize: 44 }} />
 						Play
 					</Button>
@@ -67,7 +67,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 								<>
 									<ModalBody>
 										<div className='mt-3 overflow-hidden '>
-											<YTEmbed />
+											<YTEmbed movieId={urlCategory.id} category={urlCategory.media_type} />
 										</div>
 										<div>
 											<p className='mt-2 text-zinc-100 font-extrabold'>

@@ -51,22 +51,28 @@ const Navbar = () => {
 					</DropdownTrigger>
 					<DropdownMenu aria-label='Static Actions'>
 						<DropdownItem key='HOME'>
-							<Link href={'/series'}>HOME</Link>
+							<Link href={'/'} aria-label='HOME'>
+								HOME
+							</Link>
 						</DropdownItem>
 						<DropdownItem key='search'>
-							<Link href={'/series'}>Series</Link>
+							<Link href={'/series'} aria-label='TV Series'>
+								Series
+							</Link>
 						</DropdownItem>
 						<DropdownItem key='favorite'>
-							<Link href={'/movies'}>Movies</Link>
+							<Link href={'/movies'} aria-label='Movies'>
+								Movies
+							</Link>
 						</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>
 
-				<a href={'#top'}>
+				<a href={'#top'} aria-label='Scroll to top'>
 					<Image src={'/assets/logo.png'} alt='logo' width='0' height='0' sizes='100vw' className='w-auto  max-h-16' />
 				</a>
 
-				<Link href={'/'}>
+				<Link href={'/'} aria-label='HOME'>
 					<Button disableRipple className='ml-5 sm:block hidden font-semibold text-slate-50 bg-transparent'>
 						HOME
 					</Button>
@@ -83,12 +89,12 @@ const Navbar = () => {
 					</DropdownTrigger>
 					<DropdownMenu aria-label='Static Actions'>
 						<DropdownItem key='search'>
-							<Link className='font-semibold' href={'/series'}>
+							<Link className='font-semibold' href={'/series'} aria-label='TV Series'>
 								Series
 							</Link>
 						</DropdownItem>
 						<DropdownItem key='favorite'>
-							<Link className='font-semibold' href={'/movies'}>
+							<Link className='font-semibold' href={'/movies'} aria-label='Movies'>
 								Movies
 							</Link>
 						</DropdownItem>
@@ -96,13 +102,13 @@ const Navbar = () => {
 				</Dropdown>
 			</div>
 			<div className='flex  w-[50%] sm:w-[40%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%] justify-between items-center'>
-				<Link className='p-2 hidden sm:flex' href={'/search'}>
+				<Link className='p-2 hidden sm:flex' href={'/search'} aria-label='Search'>
 					<Button className='mr-2 flex flex-1 items-center ' isIconOnly aria-label='Search'>
 						<SearchOutlined sx={{ fontSize: 40 }} />
 					</Button>
 				</Link>
-				<Link className='p-2 hidden sm:flex' href={'/favorites'}>
-					<Button className='flex items-center bg-[#DD202D]' isIconOnly>
+				<Link className='p-2 hidden sm:flex' href={'/favorites'} aria-label='Favorite'>
+					<Button className='flex items-center bg-[#DD202D]' aria-label='Favorite' isIconOnly>
 						<FavoriteBorderOutlined sx={{ fontSize: 40 }} />
 					</Button>
 				</Link>
@@ -110,22 +116,27 @@ const Navbar = () => {
 				<Dropdown onClose={() => handleMenuClick('user')} shouldCloseOnInteractOutside={e => true}>
 					<DropdownTrigger>
 						<Button
+							aria-label='User Menu'
 							disableRipple
 							className=' ml-auto sm:ml-0 font-semibold text-slate-50 bg-transparent'
 							onClick={() => handleMenuClick('user')}>
 							<Image className='p-1 rounded-2xl ' src={'/assets/profile.png'} alt='profile' height={50} width={50} />
-							User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}
+							<span>User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}</span>
 						</Button>
 					</DropdownTrigger>
 					<DropdownMenu aria-label='Static Actions'>
 						<DropdownItem className='sm:hidden' key='search'>
-							<Link href={'/search'}>Search</Link>
+							<Link href={'/search'} aria-label='Search'>
+								Search
+							</Link>
 						</DropdownItem>
 						<DropdownItem className='sm:hidden' key='favorite'>
-							<Link href={'/favorites'}>Favorites</Link>
+							<Link href={'/favorites'} aria-label='Favorites'>
+								Favorites
+							</Link>
 						</DropdownItem>
 						<DropdownItem key='logout' className='text-[#DD202D]' color='danger'>
-							<Link href={'/login'}>
+							<Link href={'/login'} aria-label='Log out'>
 								<strong>Log out</strong>
 							</Link>
 						</DropdownItem>

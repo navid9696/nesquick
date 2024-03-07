@@ -8,6 +8,7 @@ interface Props {
 	title: string
 	movies: IMovie[]
 	genres:IGenres[]
+	type:string
 }
 
 interface State {
@@ -35,7 +36,7 @@ class MovieRow extends Component<Props, State> {
 	}
 
 	render() {
-		const { title, movies,genres } = this.props
+		const { title, movies,genres,type } = this.props
 
 		return (
 			<div className='mx-5 sm:mx-10 mb-10 text-slate-50 '>
@@ -50,7 +51,7 @@ class MovieRow extends Component<Props, State> {
 						}   px-10 scroll-container relative`}>
 						<div className='flex  gap-3 sm:gap-5'>
 							{movies.map(movie => (
-								<MovieCard key={movie.id} movie={movie} genres={genres}/>
+								<MovieCard type={type} key={movie.id} movie={movie} genres={genres}/>
 							))}
 						</div>
 					</ScrollContainer>

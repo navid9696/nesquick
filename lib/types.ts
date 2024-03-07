@@ -12,7 +12,7 @@ export interface IMovie {
 	genre_ids: number[]
 	popularity: number
 	release_date: string
-	first_air_date:string
+	first_air_date: string
 	video: boolean
 	vote_average: number
 	vote_count: number
@@ -24,7 +24,7 @@ export interface IGenres {
 	movies: IMovie[]
 }
 
-export interface ITrailers {
-	id: string
-	type: string
+export interface IVideo {
+	key: string
+	type: 'Teaser' | 'Trailer'
 }

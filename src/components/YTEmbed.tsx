@@ -1,12 +1,55 @@
 import { YouTubeEmbed } from '@next/third-parties/google'
+import { IVideo } from '../../lib/types'
+import { useEffect, useState } from 'react'
 
-const YTEmbed = () => {
+interface YTEmbedProps {
+	movieId: number
+	category: string
+}
+
+const YTEmbed = ({ movieId, category }: YTEmbedProps) => {
+	const [trailerKey, setTrailerKey] = useState<string>('')
+
+	const options = {
+		method: 'GET',
+		headers: {
+			accept: 'application/json',
+			Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
+		},
+	}
+
+	const fetchTrailers = async () => {
+		try {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${category}/${movieId}/videos`, options)
+			const data = await res.json()
+			const trailers = data.results
+			for (const trailer of trailers) {
+				if (trailer?.type === 'Trailer') {
+					setTrailerKey(trailer.key)
+					return // Zakończ iterację po znalezieniu pierwszego trailera
+				}
+			}
+
+			// Jeśli nie znaleziono trailera, szukaj następnego typu
+			for (const trailer of trailers) {
+				if (trailer?.type === 'Teaser' || trailer?.type === 'Opening Credits') {
+					setTrailerKey(trailer.key)
+					return // Zakończ iterację po znalezieniu pierwszego trailera
+				}
+			}
+		} catch (err) {
+			console.log('Error - ', err)
+		}
+	}
+	useEffect(() => {
+		fetchTrailers()
+	}, [movieId, category])
+
 	return (
 		<YouTubeEmbed
-			videoid='e1k1PC0TtmE'
-			params='autoplay=1&disablekb=1&controls=0&iv_load_policy=0&loop=1&rel=0&cc_load_policy=0'
+			videoid={trailerKey}
+			params='?autoplay=1&disablekb=1&controls=0&iv_load_policy=0&loop=1&rel=0&cc_load_policy=0'
 		/>
 	)
 }
-
 export default YTEmbed

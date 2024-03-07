@@ -17,7 +17,7 @@ const Movies = async () => {
 			<Navbar />
 			<Hero urlCategory={trendingMovie} genres={genresMovies} />
 			{genresMovies.map((genre: IGenres) => (
-				<MovieRow key={genre?.id} title={genre?.name} movies={genre?.movies} genres={genresMovies}/>
+				<MovieRow type='movie' key={genre?.id} title={genre?.name} movies={genre?.movies} genres={genresMovies}/>
 			))}
 			<ArrowUp />
 			<Footer />

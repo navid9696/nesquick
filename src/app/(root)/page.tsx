@@ -1,9 +1,10 @@
 import Hero from '@components/Hero'
 import Navbar from '@components/Navbar'
-import { fetchGenres, fetchTrending } from '../../../actions/movieData'
+import { fetchGenres, fetchTrailers, fetchTrending } from '../../../actions/movieData'
 import MovieRow from '@components/MovieRow'
 import Footer from '@components/Footer'
 import ArrowUp from '@components/ArrowUp'
+import { IGenres, IMovie, IVideo } from '../../../lib/types'
 
 const Home = async () => {
 	const trendingMovies = await fetchTrending('movie')
@@ -18,10 +19,11 @@ const Home = async () => {
 
 	return (
 		<>
+			
 			<Navbar />
 			<Hero urlCategory={trendingShow} genres={allGenres} />
-			<MovieRow title={'Movies'} movies={trendingMovies} genres={genresMovies} />
-			<MovieRow title={'Series'} movies={trendingTv} genres={genresTv} />
+			<MovieRow type='movie' title={'Movies'} movies={trendingMovies} genres={genresMovies} />
+			<MovieRow type='tv' title={'Series'} movies={trendingTv} genres={genresTv} />
 			<ArrowUp />
 			<Footer />
 		</>

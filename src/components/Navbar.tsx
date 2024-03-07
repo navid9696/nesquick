@@ -62,9 +62,9 @@ const Navbar = () => {
 					</DropdownMenu>
 				</Dropdown>
 
-				<Link href={'#top'}>
+				<a href={'#top'}>
 					<Image src={'/assets/logo.png'} alt='logo' width='0' height='0' sizes='100vw' className='w-auto  max-h-16' />
-				</Link>
+				</a>
 
 				<Link href={'/'}>
 					<Button disableRipple className='ml-5 sm:block hidden font-semibold text-slate-50 bg-transparent'>

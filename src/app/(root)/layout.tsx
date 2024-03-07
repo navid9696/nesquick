@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../globals.css'
+import { Providers } from '@components/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,7 @@ export default function RootLayout({
 	return (
 		<html className='bg-black scrollbar-hide scroll-smooth ' style={{ scrollBehavior: 'smooth' }} lang='en'>
 			<body id='top' className={`${inter.className} `}>
-				{children}
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	)

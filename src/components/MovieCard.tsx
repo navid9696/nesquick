@@ -4,6 +4,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import Image from 'next/image'
 import { fetchGenres, fetchTrailers } from '../../actions/movieData'
 import { YouTubeEmbed } from '@next/third-parties/google'
+import YTEmbed from './YTEmbed'
 
 interface Props {
 	movie: IMovie
@@ -32,7 +33,7 @@ const MovieCard = ({ movie, genres }: Props) => {
 				</div>
 			)}
 			<Modal
-				className='pb-3 z-50 xl:self-center'
+				className='pb-1 z-50 xl:self-center'
 				hideCloseButton
 				placement='bottom-center'
 				scrollBehavior='outside'
@@ -44,29 +45,27 @@ const MovieCard = ({ movie, genres }: Props) => {
 						<>
 							<ModalBody>
 								<div className='mt-3 overflow-hidden '>
-									<YouTubeEmbed
-										videoid='e1k1PC0TtmE'
-										params='autoplay=1&disablekb=1&controls=0&iv_load_policy=0&loop=1&rel=0&cc_load_policy=0'
-									/>
+									<YTEmbed />
 								</div>
 								<div>
 									<p className='mt-2 text-zinc-100 font-extrabold'>
-										Name:<span className='ml-2 text-zinc-200 font-semibold'>{movie?.title || movie?.name}</span>
+										Name:<span className='ml-2 text-zinc-200 text-md font-semibold'>{movie?.title || movie?.name}</span>
 									</p>
 									<p className='mt-2 text-zinc-100 font-extrabold'>
 										Release Date:
-										<span className='ml-2 text-red-200 font-semibold'>
-											{movie?.release_date}tu powinna być data ale się nie wyświetla{' '}
+										<span className='ml-2 text-zinc-200 text-md font-semibold'>
+											{movie?.first_air_date || movie?.release_date}{' '}
 										</span>
 									</p>
-									<p className='mt-2 text-sm text-zinc-200 ml-2'>{movie?.overview}</p>
+									<p className='mt-2 text-xs text-zinc-300 ml-2'>{movie?.overview}</p>
 
 									<p className='mt-2 text-zinc-100 font-extrabold'>
-										Rating:<span className='ml-2 text-zinc-200 font-semibold'>{movie?.vote_average.toFixed(1)}</span>
+										Rating:
+										<span className='ml-2 text-zinc-200 text-sm font-semibold'>{movie?.vote_average.toFixed(1)}</span>
 									</p>
 									<p className='mt-2 text-zinc-100 font-extrabold'>
 										Genres:
-										<span className='ml-2 text-zinc-200 font-semibold'>{genreNames}</span>
+										<span className='ml-2 text-zinc-200 text-sm font-semibold'>{genreNames}</span>
 									</p>
 								</div>
 							</ModalBody>

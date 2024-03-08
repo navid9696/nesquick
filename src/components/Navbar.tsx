@@ -3,13 +3,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Divide as Hamburger } from 'hamburger-react'
 import { ArrowDropDown, ArrowLeft, FavoriteBorderOutlined, SearchOutlined } from '@mui/icons-material'
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, NextUIProvider } from '@nextui-org/react'
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@nextui-org/react'
 import { useState, useEffect } from 'react'
+import SearchInput from './SearchInput'
+import { useOutsideClick } from '@hooks/useOutsideClick'
 
 const Navbar = () => {
 	const [userMenu, setUserMenu] = useState<boolean>(false)
 	const [categoryOpen, setCategoryOpen] = useState<boolean>(false)
-	const [top, setTop] = useState(true)
+	const [top, setTop] = useState<boolean>(true)
+	const [showSearch, setShowSearch] = useState<boolean>(false)
+
+	const ref = useOutsideClick(() => {
+		setShowSearch(false)
+	})
 
 	const handleMenuClick = (menuType: string) => {
 		if ((menuType === 'user' && !categoryOpen) || (menuType === 'category' && !userMenu)) {
@@ -32,118 +39,136 @@ const Navbar = () => {
 	}, [top])
 
 	return (
-		<nav
-			className={`px-2 py-1 md:px-12 sm:py-6 flex text-slate-50 sticky top-0 z-40 ${
-				!top && ` bg-gradient-to-b bg-gradient  from-black/85  from-85% `
-			}`}>
-			<div className='flex flex-1 items-center'>
-				<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
-					<DropdownTrigger>
-						<button className='sm:hidden mr-2 '>
-							<Hamburger
-								toggled={categoryOpen}
-								toggle={() => handleMenuClick('category')}
-								label='Show menu'
-								color='#fff'
-								size={28}
-							/>
-						</button>
-					</DropdownTrigger>
-					<DropdownMenu aria-label='Static Actions'>
-						<DropdownItem key='HOME'>
-							<Link href={'/'} aria-label='HOME'>
-								HOME
-							</Link>
-						</DropdownItem>
-						<DropdownItem key='search'>
-							<Link href={'/series'} aria-label='TV Series'>
-								Series
-							</Link>
-						</DropdownItem>
-						<DropdownItem key='favorite'>
-							<Link href={'/movies'} aria-label='Movies'>
-								Movies
-							</Link>
-						</DropdownItem>
-					</DropdownMenu>
-				</Dropdown>
+		<>
+			<nav
+				className={`px-2 py-1 md:px-12 sm:py-6 flex text-slate-50 sticky top-0 z-40 ${
+					!top && `bg-gradient-to-b bg-gradient  from-black/85  from-85% `
+				}`}>
+				<div className='flex flex-1 items-center'>
+					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
+						<DropdownTrigger>
+							<button className='sm:hidden mr-2 '>
+								<Hamburger
+									toggled={categoryOpen}
+									toggle={() => handleMenuClick('category')}
+									label='Show menu'
+									color='#fff'
+									size={28}
+								/>
+							</button>
+						</DropdownTrigger>
+						<DropdownMenu aria-label='Static Actions'>
+							<DropdownItem key='HOME'>
+								<Link className='font-bold' href={'/'} aria-label='HOME'>
+									HOME
+								</Link>
+							</DropdownItem>
+							<DropdownItem key='search'>
+								<Link href={'/series'} aria-label='TV Series'>
+									Series
+								</Link>
+							</DropdownItem>
+							<DropdownItem key='favorite'>
+								<Link href={'/movies'} aria-label='Movies'>
+									Movies
+								</Link>
+							</DropdownItem>
+						</DropdownMenu>
+					</Dropdown>
 
-				<a href={'#top'} aria-label='Scroll to top'>
-					<Image src={'/assets/logo.png'} alt='logo' width='0' height='0' sizes='100vw' className='w-auto  max-h-16' />
-				</a>
+					<a href={'#top'} aria-label='Scroll to top'>
+						<Image
+							src={'/assets/logo.png'}
+							alt='logo'
+							width='0'
+							height='0'
+							sizes='100vw'
+							className='w-auto  max-h-16'
+						/>
+					</a>
 
-				<Link href={'/'} aria-label='HOME'>
-					<Button disableRipple className='ml-5 sm:block hidden font-semibold text-slate-50 bg-transparent'>
-						HOME
-					</Button>
-				</Link>
-
-				<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
-					<DropdownTrigger>
-						<Button
-							disableRipple
-							className='ml-5 sm:block hidden font-semibold text-slate-50 bg-transparent'
-							onClick={() => handleMenuClick('category')}>
-							Browse {categoryOpen ? <ArrowDropDown /> : <ArrowLeft />}
+					<Link href={'/'} aria-label='HOME'>
+						<Button disableRipple className='ml-1 sm:block hidden font-bold text-slate-50 bg-transparent'>
+							HOME
 						</Button>
-					</DropdownTrigger>
-					<DropdownMenu aria-label='Static Actions'>
-						<DropdownItem key='search'>
-							<Link className='font-semibold' href={'/series'} aria-label='TV Series'>
-								Series
-							</Link>
-						</DropdownItem>
-						<DropdownItem key='favorite'>
-							<Link className='font-semibold' href={'/movies'} aria-label='Movies'>
-								Movies
-							</Link>
-						</DropdownItem>
-					</DropdownMenu>
-				</Dropdown>
-			</div>
-			<div className='flex  w-[50%] sm:w-[40%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%] justify-between items-center'>
-				<Link className='p-2 hidden sm:flex' href={'/search'} aria-label='Search'>
-					<Button className='mr-2 flex flex-1 items-center ' isIconOnly aria-label='Search'>
+					</Link>
+
+					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
+						<DropdownTrigger>
+							<Button
+								disableRipple
+								className='ml-1 sm:block hidden font-semibold text-slate-50 bg-transparent'
+								onClick={() => handleMenuClick('category')}>
+								Browse {categoryOpen ? <ArrowDropDown /> : <ArrowLeft />}
+							</Button>
+						</DropdownTrigger>
+						<DropdownMenu aria-label='Static Actions'>
+							<DropdownItem key='search'>
+								<Link className='font-semibold' href={'/series'} aria-label='TV Series'>
+									Series
+								</Link>
+							</DropdownItem>
+							<DropdownItem key='favorite'>
+								<Link className='font-semibold' href={'/movies'} aria-label='Movies'>
+									Movies
+								</Link>
+							</DropdownItem>
+						</DropdownMenu>
+					</Dropdown>
+				</div>
+				<div className='flex  w-[50%] sm:w-[40%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%] justify-between items-center'>
+					<Button
+						onClick={() => {
+							setShowSearch(!showSearch)
+						}}
+						className='p-2 hidden sm:flex mr-2  items-center '
+						isIconOnly
+						aria-label='Search'>
 						<SearchOutlined sx={{ fontSize: 40 }} />
 					</Button>
-				</Link>
-				<Link className='p-2 hidden sm:flex' href={'/favorites'} aria-label='Favorite'>
-					<Button className='flex items-center bg-[#DD202D]' aria-label='Favorite' isIconOnly>
-						<FavoriteBorderOutlined sx={{ fontSize: 40 }} />
-					</Button>
-				</Link>
 
-				<Dropdown onClose={() => handleMenuClick('user')} shouldCloseOnInteractOutside={e => true}>
-					<DropdownTrigger>
-						<Button
-							aria-label='User Menu'
-							disableRipple
-							className=' ml-auto sm:ml-0 font-semibold text-slate-50 bg-transparent'
-							onClick={() => handleMenuClick('user')}>
-							<Image className='p-1 rounded-2xl ' src={'/assets/profile.png'} alt='profile' height={50} width={50} />
-							<span>User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}</span>
+					<Link className='p-2 hidden sm:flex' href={'/favorites'} aria-label='Favorite'>
+						<Button className='flex items-center bg-[#DD202D]' aria-label='Favorite' isIconOnly>
+							<FavoriteBorderOutlined sx={{ fontSize: 40 }} />
 						</Button>
-					</DropdownTrigger>
-					<DropdownMenu aria-label='Static Actions'>
-						<DropdownItem className='sm:hidden' key='search'>
-							<Link href={'/search'} aria-label='Search'>
+					</Link>
+
+					<Dropdown onClose={() => handleMenuClick('user')} shouldCloseOnInteractOutside={e => true}>
+						<DropdownTrigger>
+							<Button
+								aria-label='User Menu'
+								disableRipple
+								className=' ml-auto sm:ml-0 font-semibold text-slate-50 bg-transparent'
+								onClick={() => handleMenuClick('user')}>
+								<Image className='p-1 rounded-2xl ' src={'/assets/profile.png'} alt='profile' height={50} width={50} />
+								<span>User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}</span>
+							</Button>
+						</DropdownTrigger>
+						<DropdownMenu aria-label='Static Actions'>
+							<DropdownItem
+								onClick={() => {
+									setShowSearch(!showSearch)
+								}}
+								className='sm:hidden '
+								key='search'>
 								Search
-							</Link>
-						</DropdownItem>
-						<DropdownItem className='sm:hidden' key='favorite'>
-							<Link href={'/favorites'} aria-label='Favorites'>
-								Favorites
-							</Link>
-						</DropdownItem>
-						<DropdownItem key='logout' className='text-[#DD202D]' color='danger'>
-							<Link href={'/login'} aria-label='Log out'>
-								<strong>Log out</strong>
-							</Link>
-						</DropdownItem>
-					</DropdownMenu>
-				</Dropdown>
-			</div>
-		</nav>
+							</DropdownItem>
+							<DropdownItem className='sm:hidden' key='favorite'>
+								<Link href={'/favorites'} aria-label='Favorites'>
+									Favorites
+								</Link>
+							</DropdownItem>
+							<DropdownItem key='logout' className='text-[#DD202D]' color='danger'>
+								<Link href={'/login'} aria-label='Log out'>
+									<strong>Log out</strong>
+								</Link>
+							</DropdownItem>
+						</DropdownMenu>
+					</Dropdown>
+				</div>
+			</nav>
+			<div ref={ref}>{showSearch && <SearchInput />}</div>
+		</>
 	)
 }
 

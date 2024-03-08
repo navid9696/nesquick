@@ -7,8 +7,8 @@ import { IGenres, IMovie } from '../../lib/types'
 interface Props {
 	title: string
 	movies: IMovie[]
-	genres:IGenres[]
-	type:string
+	genres: IGenres[]
+	type: string
 }
 
 interface State {
@@ -36,10 +36,10 @@ class MovieRow extends Component<Props, State> {
 	}
 
 	render() {
-		const { title, movies,genres,type } = this.props
+		const { title, movies, genres, type } = this.props
 
 		return (
-			<div className='mx-5 sm:mx-10 mb-10 text-slate-50 '>
+			<div className='mx-2 sm:mx-10 mb-10 text-slate-50 '>
 				<h2 className='pl-10 text-2xl sm:text-3xl font-bold'>{title}</h2>
 				<div className='relative '>
 					<div className='absolute z-40 inset-y-0 left-0 w-4 bg-gradient-to-l from-transparent to-black'></div>
@@ -51,7 +51,7 @@ class MovieRow extends Component<Props, State> {
 						}   px-10 scroll-container relative`}>
 						<div className='flex  gap-3 sm:gap-5'>
 							{movies.map(movie => (
-								<MovieCard type={type} key={movie.id} movie={movie} genres={genres}/>
+								<MovieCard type={type} key={movie.id} movie={movie} genres={genres} />
 							))}
 						</div>
 					</ScrollContainer>

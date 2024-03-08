@@ -1,5 +1,4 @@
 import { YouTubeEmbed } from '@next/third-parties/google'
-import { IVideo } from '../../lib/types'
 import { useEffect, useState } from 'react'
 
 interface YTEmbedProps {
@@ -23,20 +22,21 @@ const YTEmbed = ({ movieId, category }: YTEmbedProps) => {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${category}/${movieId}/videos`, options)
 			const data = await res.json()
 			const trailers = data.results
+
 			for (const trailer of trailers) {
 				if (trailer?.type === 'Trailer') {
 					setTrailerKey(trailer.key)
-					return // Zakończ iterację po znalezieniu pierwszego trailera
+					return
 				}
 			}
 
-			// Jeśli nie znaleziono trailera, szukaj następnego typu
 			for (const trailer of trailers) {
 				if (trailer?.type === 'Teaser' || trailer?.type === 'Opening Credits') {
 					setTrailerKey(trailer.key)
-					return // Zakończ iterację po znalezieniu pierwszego trailera
+					return
 				}
 			}
+			
 		} catch (err) {
 			console.log('Error - ', err)
 		}

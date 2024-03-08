@@ -16,7 +16,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html className='bg-black scrollbar-hide scroll-smooth ' style={{ scrollBehavior: 'smooth' }} lang='en'>
+		<html className='bg-black scrollbar-hide scroll-smooth ' lang='en'>
 			<body id='top' className={`${inter.className} `}>
 				<Providers>{children}</Providers>
 			</body>

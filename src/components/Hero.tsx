@@ -21,7 +21,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 		})
 		.join(' | ')
 	return (
-		<div className='flex -mt-[62px] h-screen w-full flex-col justify-end sm:justify-start  items-center sm:items-start bg-black/50  '>
+		<header className='flex -mt-[100px] mb-20 sm:mb-0  h-screen w-full flex-col justify-end sm:justify-start  items-center sm:items-start bg-black/15  '>
 			<div className='absolute top-0 left-0 b -z-10 h-screen w-screen '>
 				<Image
 					className='object-cover h-full  w-full md:hidden'
@@ -37,7 +37,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 				/>
 				<div className='absolute inset-0 bg-gradient-to-b bg-gradient from-black via-transparent to-black'></div>
 			</div>
-			<div className=' flex flex-col items-center sm:items-start px-16 pb-28 sm:pt-44 gap-5 sm:gap-12 max-w-2xl'>
+			<div className=' flex flex-col items-center sm:items-start mb-10 px-16 pb-28 sm:pt-44 gap-5 sm:gap-12 max-w-2xl'>
 				<h1 className='text-center font-bold text-4xl sm:text-5xl text-slate-50'>
 					{urlCategory?.title || urlCategory?.name}
 				</h1>
@@ -107,7 +107,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 					</Modal>
 				</div>
 			</div>
-		</div>
+		</header>
 	)
 }
 

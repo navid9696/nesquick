@@ -16,11 +16,13 @@ const Movies = async () => {
 		<>
 			<Navbar />
 			<Hero urlCategory={trendingMovie} genres={genresMovies} />
-			{genresMovies.map((genre: IGenres) => (
-				<MovieRow type='movie' key={genre?.id} title={genre?.name} movies={genre?.movies} genres={genresMovies}/>
-			))}
-			<ArrowUp />
-			<Footer />
+			<main>
+				{genresMovies.map((genre: IGenres) => (
+					<MovieRow type='movie' key={genre?.id} title={genre?.name} movies={genre?.movies} genres={genresMovies} />
+				))}
+				<ArrowUp />
+				<Footer />
+			</main>
 		</>
 	)
 }

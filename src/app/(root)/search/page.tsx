@@ -1,9 +1,9 @@
 'use client'
 
-
+import Navbar from '@components/Navbar'
 
 const Search = () => {
-	return <div></div>
+	return <Navbar />
 }
 
 export default Search

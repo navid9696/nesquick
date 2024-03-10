@@ -21,8 +21,8 @@ const Movies = async () => {
 					<MovieRow type='movie' key={genre?.id} title={genre?.name} movies={genre?.movies} genres={genresMovies} />
 				))}
 				<ArrowUp />
-				<Footer />
 			</main>
+				<Footer />
 		</>
 	)
 }

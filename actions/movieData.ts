@@ -28,3 +28,10 @@ export const fetchTrailers = async (category: string, movieId: number) => {
 
 	return trailers
 }
+
+export const fetchSearch = async (category: string, query: string) => {
+	const data = await getApiResponse(`/search/${category}?query=${query}&include_adult=true`)
+	const searched = data.results
+
+	return searched
+}

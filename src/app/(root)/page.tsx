@@ -1,6 +1,6 @@
 import Hero from '@components/Hero'
 import Navbar from '@components/Navbar'
-import { fetchGenres, fetchTrailers, fetchTrending } from '../../../actions/movieData'
+import { fetchGenres, fetchTrending } from '../../../actions/movieData'
 import MovieRow from '@components/MovieRow'
 import Footer from '@components/Footer'
 import ArrowUp from '@components/ArrowUp'
@@ -24,8 +24,8 @@ const Home = async () => {
 				<MovieRow type='movie' title={'Movies'} movies={trendingMovies} genres={genresMovies} />
 				<MovieRow type='tv' title={'Series'} movies={trendingTv} genres={genresTv} />
 				<ArrowUp />
-				<Footer />
 			</main>
+				<Footer />
 		</>
 	)
 }

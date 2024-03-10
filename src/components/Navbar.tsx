@@ -38,6 +38,20 @@ const Navbar = () => {
 		return () => window.removeEventListener('scroll', scrollHandler)
 	}, [top])
 
+	useEffect(() => {
+		const handleDocumentKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				setShowSearch(false)
+			}
+		}
+
+		document.addEventListener('keydown', handleDocumentKeyDown)
+
+		return () => {
+			document.removeEventListener('keydown', handleDocumentKeyDown)
+		}
+	}, [])
+
 	return (
 		<>
 			<nav
@@ -167,7 +181,15 @@ const Navbar = () => {
 					</Dropdown>
 				</div>
 			</nav>
-			<div ref={ref}>{showSearch && <SearchInput />}</div>
+			<div
+				onKeyDown={e => {
+					if (e.key === 'Escape') {
+						setShowSearch(false)
+					}
+				}}
+				ref={ref}>
+				{showSearch && <SearchInput />}
+			</div>
 		</>
 	)
 }

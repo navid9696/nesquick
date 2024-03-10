@@ -1,32 +1,31 @@
 'use client'
 import { IGenres, IMovie } from '../../lib/types'
 import { baseImgUrl } from '../../lib/constants'
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
+import { Modal, ModalContent, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
 import Image from 'next/image'
-import { fetchGenres, fetchTrailers } from '../../actions/movieData'
-import YTEmbed from './YTEmbed'
 
+import YTEmbed from './YTEmbed'
 
 interface Props {
 	movie: IMovie
-	genres: IGenres[]
-	type:string
+	genres?: IGenres[]
+	type?: string
 }
 
-const MovieCard = ({ movie, genres,type }: Props) => {
+const MovieCard = ({ movie, genres, type }: Props) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const genreNames = movie?.genre_ids
 		.map(genreId => {
-			const genre = genres.find(genre => genre.id === genreId)
+			const genre = genres?.find(genre => genre.id === genreId)
 			return genre ? genre.name : ''
 		})
 		.join(' | ')
 	return (
 		<>
 			{movie.poster_path && (
-				<div className='relative min-w-[194px] h-72 my-10 cursor-pointer' onClick={onOpen}>
+				<div className='relative min-w-[194px] h-72 my-3 cursor-pointer' onClick={onOpen}>
 					<Image
-						className='h-full w-full rounded-lg transition hover:scale-105 hover:outline hover:outline-white hover:outline-3 '
+						className='h-full  rounded-lg transition hover:scale-105 hover:outline hover:outline-white hover:outline-3 '
 						alt='poster'
 						width={200}
 						height={0}
@@ -47,7 +46,7 @@ const MovieCard = ({ movie, genres,type }: Props) => {
 						<>
 							<ModalBody>
 								<div className='mt-3 overflow-hidden '>
-									<YTEmbed movieId={movie.id} category={type}  />
+									<YTEmbed movieId={movie.id} category={type} />
 								</div>
 								<div>
 									<p className='mt-2 text-zinc-100 font-extrabold'>
@@ -65,9 +64,12 @@ const MovieCard = ({ movie, genres,type }: Props) => {
 										Rating:
 										<span className='ml-2 text-zinc-200 text-sm font-semibold'>{movie?.vote_average.toFixed(1)}</span>
 									</p>
+
 									<p className='mt-2 text-zinc-100 font-extrabold'>
 										Genres:
-										<span className='ml-2 text-zinc-200 text-sm font-semibold'>{genreNames}</span>
+										<span className='ml-2 text-zinc-200 text-sm font-semibold'>
+											{genreNames ? genreNames : 'Unknown'}
+										</span>
 									</p>
 								</div>
 							</ModalBody>

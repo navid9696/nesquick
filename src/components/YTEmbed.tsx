@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 interface YTEmbedProps {
 	movieId: number
-	category: string
+	category?: string
 }
 
 const YTEmbed = ({ movieId, category }: YTEmbedProps) => {
@@ -31,24 +31,29 @@ const YTEmbed = ({ movieId, category }: YTEmbedProps) => {
 			}
 
 			for (const trailer of trailers) {
-				if (trailer?.type === 'Teaser' || trailer?.type === 'Opening Credits') {
+				if (
+					trailer?.type === 'Teaser' ||
+					trailer?.type === 'Opening Credits' ||
+					trailer?.type === 'Featurette' ||
+					trailer?.type === 'Clip'
+				) {
 					setTrailerKey(trailer.key)
 					return
 				}
 			}
-			
 		} catch (err) {
 			console.log('Error - ', err)
 		}
 	}
 	useEffect(() => {
 		fetchTrailers()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [movieId, category])
 
 	return (
 		<YouTubeEmbed
 			videoid={trailerKey}
-			params='?autoplay=1&disablekb=1&controls=0&iv_load_policy=0&loop=1&rel=0&cc_load_policy=0'
+			params='?autoplay=1&iv_load_policy=0&loop=1&rel=0&cc_load_policy=0'
 		/>
 	)
 }

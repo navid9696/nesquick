@@ -1,5 +1,5 @@
 import { Search } from '@mui/icons-material'
-import { Button, Input } from '@nextui-org/react'
+import {Input } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 

@@ -173,7 +173,7 @@ const Navbar = () => {
 								</Link>
 							</DropdownItem>
 							<DropdownItem key='logout' className='text-[#DD202D]' color='danger'>
-								<Link href={'/login'} aria-label='Log out'>
+								<Link href={'/authorize'} aria-label='Log out'>
 									<strong>Log out</strong>
 								</Link>
 							</DropdownItem>

@@ -29,7 +29,7 @@ const SearchResults = async ({ query }: SearchResultsProps) => {
 			<h1 className='p-5 text-white text-2xl text-center'>
 				Results for &quot;<span className='font-semibold'>{decodeURIComponent(query)}</span>&quot;
 			</h1>
-			<hr></hr>
+
 			<div className='p-5'>
 				<div className='text-slate-50 mt-10'>
 					<div className='relative'>

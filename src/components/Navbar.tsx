@@ -72,17 +72,17 @@ const Navbar = () => {
 							</button>
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
-							<DropdownItem key='HOME'>
+							<DropdownItem textValue='HOME' key='HOME'>
 								<Link className='font-bold' href={'/'} aria-label='HOME'>
 									HOME
 								</Link>
 							</DropdownItem>
-							<DropdownItem key='search'>
+							<DropdownItem textValue='Series' key='series'>
 								<Link href={'/series'} aria-label='TV Series'>
 									Series
 								</Link>
 							</DropdownItem>
-							<DropdownItem key='favorite'>
+							<DropdownItem textValue='Movies' key='movies'>
 								<Link href={'/movies'} aria-label='Movies'>
 									Movies
 								</Link>
@@ -117,12 +117,12 @@ const Navbar = () => {
 							</Button>
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
-							<DropdownItem key='search'>
+							<DropdownItem textValue='Series' key='search'>
 								<Link className='font-semibold' href={'/series'} aria-label='TV Series'>
 									Series
 								</Link>
 							</DropdownItem>
-							<DropdownItem key='favorite'>
+							<DropdownItem textValue='Movies' key='favorite'>
 								<Link className='font-semibold' href={'/movies'} aria-label='Movies'>
 									Movies
 								</Link>
@@ -160,6 +160,7 @@ const Navbar = () => {
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
 							<DropdownItem
+								textValue='Search'
 								onClick={() => {
 									setShowSearch(!showSearch)
 								}}
@@ -167,12 +168,12 @@ const Navbar = () => {
 								key='search'>
 								Search
 							</DropdownItem>
-							<DropdownItem className='sm:hidden' key='favorite'>
+							<DropdownItem textValue='Favorites' className='sm:hidden' key='favorite'>
 								<Link href={'/favorites'} aria-label='Favorites'>
 									Favorites
 								</Link>
 							</DropdownItem>
-							<DropdownItem key='logout' className='text-[#DD202D]' color='danger'>
+							<DropdownItem textValue='Log out' key='logout' className='text-[#DD202D]' color='danger'>
 								<Link href={'/authorize'} aria-label='Log out'>
 									<strong>Log out</strong>
 								</Link>

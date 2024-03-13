@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Tabs, Tab, Input, Link, Button, Card, CardBody, CardHeader } from '@nextui-org/react'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 
 interface IUser {
 	userEmail: string
@@ -13,6 +14,8 @@ interface IUser {
 const Authform = () => {
 	const [selected, setSelected] = React.useState<string | number>('login')
 	const [passwordMatch, setPasswordMatch] = useState<boolean>(true)
+	const router = useRouter()
+
 	const {
 		register: login,
 		handleSubmit: handleLoginSubmit,
@@ -23,24 +26,18 @@ const Authform = () => {
 		register: register,
 		handleSubmit: handleRegisterSubmit,
 		formState: { errors: registerErrors },
+		getValues,
 	} = useForm<IUser>()
 
 	const onRegister: SubmitHandler<IUser> = data => {
-		// if (data.userPassword !== data.confirmedPassword) {
-		// 	setPasswordMatch(false)
-		// 	return
-		// }
 		console.log(data)
-
-		// Tutaj wykonaj inne operacje po prawidłowej walidacji
 	}
 	const onLogin = (data: IUser) => {
 		console.log(data)
-
-		// Tutaj wykonaj inne operacje po prawidłowej walidacji
+		router.push('/')
 	}
 	console.log(loginErrors)
-	// console.log(registerErrors)
+	console.log(registerErrors)
 	return (
 		<div className="bg-[url('/assets/background.jpg')] h-screen w-full bg-cover bg-center ">
 			<div className='h-screen w-full bg-gradient-to-t from-black'>
@@ -131,7 +128,7 @@ const Authform = () => {
 								</Tab>
 
 								<Tab key='sign-up' title='Sign up'>
-									<form onSubmit={handleRegisterSubmit(onRegister)} className='flex flex-col gap-2 '>
+									<form className='flex flex-col gap-2 '>
 										<Input
 											{...register('userEmail', {
 												required: 'This field is required',
@@ -175,6 +172,8 @@ const Authform = () => {
 												validate: (value: string) => {
 													if (value.length < 6) {
 														return 'Minimum 6 characters'
+													} else if (getValues('userPassword') != value) {
+														return 'Your passwords do not match'
 													}
 												},
 											})}
@@ -196,7 +195,11 @@ const Authform = () => {
 											</Link>
 										</p>
 										<div className='flex gap-2 justify-end'>
-											<Button type='submit' fullWidth className='text-black font-bold bg-[#b41c26]'>
+											<Button
+												onClick={handleRegisterSubmit(onRegister)}
+												type='submit'
+												fullWidth
+												className='text-black font-bold bg-[#b41c26]'>
 												Sign up
 											</Button>
 										</div>

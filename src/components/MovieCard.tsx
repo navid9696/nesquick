@@ -3,8 +3,10 @@ import { IGenres, IMovie } from '../../lib/types'
 import { baseImgUrl } from '../../lib/constants'
 import { Modal, ModalContent, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
 import Image from 'next/image'
+import { useState } from 'react'
 
 import YTEmbed from './YTEmbed'
+import { Favorite, FavoriteBorder } from '@mui/icons-material'
 
 interface Props {
 	movie: IMovie
@@ -14,12 +16,14 @@ interface Props {
 
 const MovieCard = ({ movie, genres, type }: Props) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
+	const [isFavorite, setIsFavorite] = useState(false)
 	const genreNames = movie?.genre_ids
 		.map(genreId => {
 			const genre = genres?.find(genre => genre.id === genreId)
 			return genre ? genre.name : ''
 		})
 		.join(' | ')
+
 	return (
 		<>
 			{movie.poster_path && (
@@ -49,9 +53,21 @@ const MovieCard = ({ movie, genres, type }: Props) => {
 									<YTEmbed movieId={movie.id} category={type} />
 								</div>
 								<div>
-									<p className='mt-2 text-zinc-100 font-extrabold'>
-										Name:<span className='ml-2 text-zinc-200 text-md font-semibold'>{movie?.title || movie?.name}</span>
-									</p>
+									<div className='flex justify-between'>
+										<p className='mt-2 text-zinc-100 font-extrabold'>
+											Name:
+											<span className='ml-2 text-zinc-200 text-md font-semibold'>{movie?.title || movie?.name}</span>
+										</p>
+										<Button
+											className='text-red-600'
+											isIconOnly
+											variant='light'
+											onClick={() => {
+												setIsFavorite(!isFavorite)
+											}}>
+											{isFavorite ? <Favorite className='text-3xl' /> : <FavoriteBorder className='text-3xl' />}
+										</Button>
+									</div>
 									<p className='mt-2 text-zinc-100 font-extrabold'>
 										Release Date:
 										<span className='ml-2 text-zinc-200 text-md font-semibold'>
@@ -74,7 +90,10 @@ const MovieCard = ({ movie, genres, type }: Props) => {
 								</div>
 							</ModalBody>
 							<ModalFooter>
-								<Button color='danger' variant='ghost' onPress={onClose}>
+								<Button
+									className='bg-transparent hover:!bg-red-600 border-red-600 text-red-500 hover:text-black font-semibold'
+									variant='ghost'
+									onPress={onClose}>
 									Close
 								</Button>
 							</ModalFooter>

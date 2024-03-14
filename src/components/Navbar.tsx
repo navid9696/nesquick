@@ -73,17 +73,17 @@ const Navbar = () => {
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
 							<DropdownItem textValue='HOME' key='HOME'>
-								<Link className='font-bold' href={'/'} aria-label='HOME'>
+								<Link className='block h-full w-full font-bold' href={'/'} aria-label='HOME'>
 									HOME
 								</Link>
 							</DropdownItem>
 							<DropdownItem textValue='Series' key='series'>
-								<Link href={'/series'} aria-label='TV Series'>
+								<Link className='block h-full w-full' href={'/series'} aria-label='TV Series'>
 									Series
 								</Link>
 							</DropdownItem>
 							<DropdownItem textValue='Movies' key='movies'>
-								<Link href={'/movies'} aria-label='Movies'>
+								<Link className='block h-full w-full' href={'/movies'} aria-label='Movies'>
 									Movies
 								</Link>
 							</DropdownItem>
@@ -101,10 +101,11 @@ const Navbar = () => {
 						/>
 					</a>
 
-					<Link href={'/'} aria-label='HOME'>
-						<Button disableRipple className='ml-1 sm:block hidden font-bold text-slate-50 bg-transparent'>
-							HOME
-						</Button>
+					<Link
+						className='ml-1 p-2 sm:block hidden font-bold text-slate-50 hover:text-slate-300 transition'
+						href={'/'}
+						aria-label='HOME'>
+						HOME
 					</Link>
 
 					<Dropdown onClose={() => handleMenuClick('category')} shouldCloseOnInteractOutside={e => true}>
@@ -117,13 +118,13 @@ const Navbar = () => {
 							</Button>
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
-							<DropdownItem textValue='Series' key='search'>
-								<Link className='font-semibold' href={'/series'} aria-label='TV Series'>
+							<DropdownItem  textValue='Series' key='search'>
+								<Link className='block h-full w-full font-semibold' href={'/series'} aria-label='TV Series'>
 									Series
 								</Link>
 							</DropdownItem>
 							<DropdownItem textValue='Movies' key='favorite'>
-								<Link className='font-semibold' href={'/movies'} aria-label='Movies'>
+								<Link className='block h-full w-full font-semibold' href={'/movies'} aria-label='Movies'>
 									Movies
 								</Link>
 							</DropdownItem>
@@ -141,10 +142,11 @@ const Navbar = () => {
 						<SearchOutlined sx={{ fontSize: 40 }} />
 					</Button>
 
-					<Link className='p-2 hidden sm:flex' href={'/favorites'} aria-label='Favorite'>
-						<Button className='flex items-center bg-[#DD202D]' aria-label='Favorite' isIconOnly>
-							<FavoriteBorderOutlined sx={{ fontSize: 40 }} />
-						</Button>
+					<Link
+						className='p-[1px] hidden sm:flex rounded-2xl  text-black  bg-[#DD202D]'
+						href={'/favorites'}
+						aria-label='Favorite'>
+						<FavoriteBorderOutlined sx={{ fontSize: 40 }} />
 					</Link>
 
 					<Dropdown onClose={() => handleMenuClick('user')} shouldCloseOnInteractOutside={e => true}>
@@ -158,7 +160,7 @@ const Navbar = () => {
 								<span>User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}</span>
 							</Button>
 						</DropdownTrigger>
-						<DropdownMenu aria-label='Static Actions'>
+						<DropdownMenu  aria-label='Static Actions'>
 							<DropdownItem
 								textValue='Search'
 								onClick={() => {
@@ -169,12 +171,12 @@ const Navbar = () => {
 								Search
 							</DropdownItem>
 							<DropdownItem textValue='Favorites' className='sm:hidden' key='favorite'>
-								<Link href={'/favorites'} aria-label='Favorites'>
+								<Link className='block h-full w-full' href={'/favorites'} aria-label='Favorites'>
 									Favorites
 								</Link>
 							</DropdownItem>
 							<DropdownItem textValue='Log out' key='logout' className='text-[#DD202D]' color='danger'>
-								<Link href={'/authorize'} aria-label='Log out'>
+								<Link className='block h-full w-full' href={'/authorize'} aria-label='Log out'>
 									<strong>Log out</strong>
 								</Link>
 							</DropdownItem>

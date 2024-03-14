@@ -26,5 +26,5 @@ export interface IGenres {
 
 export interface IVideo {
 	key: string
-	type: 'Teaser' | 'Trailer'
+	type: 'Teaser' | 'Trailer' | 'Opening Credits' | 'Featurette' | 'Clip'
 }

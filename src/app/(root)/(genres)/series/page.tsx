@@ -22,7 +22,7 @@ const Series = async () => {
 				))}
 				<ArrowUp />
 			</main>
-				<Footer />
+			<Footer />
 		</>
 	)
 }

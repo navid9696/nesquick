@@ -25,7 +25,7 @@ const Home = async () => {
 				<MovieRow type='tv' title={'Series'} movies={trendingTv} genres={genresTv} />
 				<ArrowUp />
 			</main>
-				<Footer />
+			<Footer />
 		</>
 	)
 }

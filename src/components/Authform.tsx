@@ -4,6 +4,8 @@ import { Tabs, Tab, Input, Link, Button, Card, CardBody, CardHeader } from '@nex
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
+import { signIn } from 'next-auth/react'
 
 interface IUser {
 	userEmail: string
@@ -13,7 +15,7 @@ interface IUser {
 
 const Authform = () => {
 	const [selected, setSelected] = React.useState<string | number>('login')
-	const [passwordMatch, setPasswordMatch] = useState<boolean>(true)
+
 	const router = useRouter()
 
 	const {
@@ -29,15 +31,44 @@ const Authform = () => {
 		getValues,
 	} = useForm<IUser>()
 
-	const onRegister: SubmitHandler<IUser> = data => {
-		console.log(data)
+	const onRegister: SubmitHandler<IUser> = async data => {
+		let res
+
+		res = await fetch('/api/auth/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+		if (res?.ok) {
+			toast.success('Registered successfully')
+			setTimeout(() => {
+				window.location.reload()
+			}, 2000)
+		} else if (res?.status === 400) {
+			toast.error('Email already exists')
+		}
 	}
-	const onLogin = (data: IUser) => {
-		console.log(data)
-		router.push('/')
+
+	const onLogin: SubmitHandler<IUser> = async data => {
+		let res
+
+		res = await signIn('credentials', {
+			...data,
+			redirect: false,
+		})
+
+		if (res && res.ok) {
+			toast.success('Login successfully')
+			setTimeout(() => {
+				router.push('/')
+			}, 2000)
+		} else {
+			toast.error('Email or password is incorrect')
+		}
 	}
-	console.log(loginErrors)
-	console.log(registerErrors)
+
 	return (
 		<div className="bg-[url('/assets/background.jpg')] h-screen w-full bg-cover bg-center ">
 			<div className='h-screen w-full bg-gradient-to-t from-black'>

@@ -7,6 +7,7 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@
 import { useState, useEffect } from 'react'
 import SearchInput from './SearchInput'
 import { useOutsideClick } from '@hooks/useOutsideClick'
+import { signOut } from 'next-auth/react'
 
 const Navbar = () => {
 	const [userMenu, setUserMenu] = useState<boolean>(false)
@@ -118,7 +119,7 @@ const Navbar = () => {
 							</Button>
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
-							<DropdownItem  textValue='Series' key='search'>
+							<DropdownItem textValue='Series' key='search'>
 								<Link className='block h-full w-full font-semibold' href={'/series'} aria-label='TV Series'>
 									Series
 								</Link>
@@ -160,7 +161,7 @@ const Navbar = () => {
 								<span>User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}</span>
 							</Button>
 						</DropdownTrigger>
-						<DropdownMenu  aria-label='Static Actions'>
+						<DropdownMenu aria-label='Static Actions'>
 							<DropdownItem
 								textValue='Search'
 								onClick={() => {
@@ -176,7 +177,13 @@ const Navbar = () => {
 								</Link>
 							</DropdownItem>
 							<DropdownItem textValue='Log out' key='logout' className='text-[#DD202D]' color='danger'>
-								<Link className='block h-full w-full' href={'/authorize'} aria-label='Log out'>
+								<Link
+									onClick={() => {
+										signOut({ callbackUrl: '/authorize' })
+									}}
+									className='block h-full w-full'
+									href={'/authorize'}
+									aria-label='Log out'>
 									<strong>Log out</strong>
 								</Link>
 							</DropdownItem>

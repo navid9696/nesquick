@@ -7,18 +7,18 @@ export const POST = async (req: NextRequest) => {
 	try {
 		await connectToDB()
 
-		const { userEmail, userPassword } = await req.json()
-		const existingUser = await User.findOne({ userEmail })
+		const { email, password } = await req.json()
+		const existingUser = await User.findOne({ email })
 
 		if (existingUser) {
 			return new Response('User already exists', { status: 400 })
 		}
 
-		const hashedPassword = await hash(userPassword, 10)
+		const hashedPassword = await hash(password, 10)
 
 		const newUser = new User({
-			userEmail,
-			userPassword: hashedPassword,
+			email,
+			password: hashedPassword,
 		})
 
 		await newUser.save()

@@ -8,8 +8,8 @@ import toast from 'react-hot-toast'
 import { signIn } from 'next-auth/react'
 
 interface IUser {
-	userEmail: string
-	userPassword: string
+	email: string
+	password: string
 	confirmedPassword: string
 }
 
@@ -32,29 +32,28 @@ const Authform = () => {
 	} = useForm<IUser>()
 
 	const onRegister: SubmitHandler<IUser> = async data => {
-		let res
-
-		res = await fetch('/api/auth/register', {
+		let res = await fetch('/api/auth/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(data),
 		})
-		if (res?.ok) {
+
+		if (res.ok) {
 			toast.success('Registered successfully')
 			setTimeout(() => {
-				window.location.reload()
+				setSelected('login')
 			}, 2000)
-		} else if (res?.status === 400) {
+		} else if (res.status === 400) {
 			toast.error('Email already exists')
+		} else {
+			toast.error('Something went wrong')
 		}
 	}
 
 	const onLogin: SubmitHandler<IUser> = async data => {
-		let res
-
-		res = await signIn('credentials', {
+		let res = await signIn('credentials', {
 			...data,
 			redirect: false,
 		})
@@ -64,7 +63,9 @@ const Authform = () => {
 			setTimeout(() => {
 				router.push('/')
 			}, 2000)
+			console.log(res.status)
 		} else {
+			console.log(res?.error)
 			toast.error('Email or password is incorrect')
 		}
 	}
@@ -102,7 +103,7 @@ const Authform = () => {
 								<Tab key='login' title='Login'>
 									<form className='flex flex-col gap-2'>
 										<Input
-											{...login('userEmail', {
+											{...login('email', {
 												required: 'This field is required',
 												validate: (value: string) => {
 													if (
@@ -120,9 +121,9 @@ const Authform = () => {
 											placeholder='Enter your email'
 											type='email'
 										/>
-										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'>{loginErrors.userEmail?.message}</p>
+										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'>{loginErrors.email?.message}</p>
 										<Input
-											{...login('userPassword', {
+											{...login('password', {
 												required: 'This field is required',
 												validate: (value: string) => {
 													if (value.length < 6) {
@@ -136,7 +137,7 @@ const Authform = () => {
 											placeholder='Enter your password'
 											type='password'
 										/>
-										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'> {loginErrors.userPassword?.message}</p>
+										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'> {loginErrors.password?.message}</p>
 										<p className='text-center text-small text-white'>
 											Need to create an account?{' '}
 											<Link
@@ -161,7 +162,7 @@ const Authform = () => {
 								<Tab key='sign-up' title='Sign up'>
 									<form className='flex flex-col gap-2 '>
 										<Input
-											{...register('userEmail', {
+											{...register('email', {
 												required: 'This field is required',
 												validate: (value: string) => {
 													if (
@@ -180,9 +181,9 @@ const Authform = () => {
 											placeholder='Enter your email'
 											type='email'
 										/>
-										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'>{registerErrors.userEmail?.message}</p>
+										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'>{registerErrors.email?.message}</p>
 										<Input
-											{...register('userPassword', {
+											{...register('password', {
 												required: 'This field is required',
 												validate: (value: string) => {
 													if (value.length < 6) {
@@ -196,14 +197,14 @@ const Authform = () => {
 											placeholder='Create password'
 											type='password'
 										/>
-										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'>{registerErrors.userPassword?.message}</p>
+										<p className='h-5 ml-4 -mt-1 text-red-800 text-xs'>{registerErrors.password?.message}</p>
 										<Input
 											{...register('confirmedPassword', {
 												required: 'This field is required',
 												validate: (value: string) => {
 													if (value.length < 6) {
 														return 'Minimum 6 characters'
-													} else if (getValues('userPassword') != value) {
+													} else if (getValues('password') != value) {
 														return 'Your passwords do not match'
 													}
 												},

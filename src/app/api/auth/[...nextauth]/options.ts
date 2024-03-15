@@ -10,28 +10,34 @@ export const options: NextAuthOptions = {
 			name: 'Credentials',
 
 			credentials: {
-				userEmail: { label: 'Email', type: 'email' },
-				userPassword: { label: 'Password', type: 'password' },
+				email: { label: 'Email', type: 'text' },
+				password: { label: 'Password', type: 'password' },
 			},
+
 			async authorize(credentials) {
-				if (!credentials?.userEmail || !credentials?.userPassword) {
+				if (!credentials?.email || !credentials?.password) {
 					throw new Error('Email and password are required')
 				}
 
 				await connectToDB()
 
-				const user = await User.findOne({ userEmail: credentials?.userEmail })
+				const user = await User.findOne({ email: credentials?.email })
 
 				if (!user) {
 					throw new Error('No user found')
 				}
 
-				const isMatchedPassword = await compare(credentials?.userPassword, user.userPassword)
+				const isMatchedPassword = await compare(credentials?.password, user.password)
+				console.log('Credentials:', credentials)
+				console.log('User:', user)
+				console.log('Is password matched?', isMatchedPassword)
 
 				if (!isMatchedPassword) {
 					throw new Error('Incorrect password')
 				}
-
+				console.log('Credentials:', credentials)
+				console.log('User:', user)
+				console.log('Is password matched?', isMatchedPassword)
 				return user
 			},
 		}),

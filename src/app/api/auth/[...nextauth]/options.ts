@@ -28,16 +28,12 @@ export const options: NextAuthOptions = {
 				}
 
 				const isMatchedPassword = await compare(credentials?.password, user.password)
-				console.log('Credentials:', credentials)
-				console.log('User:', user)
-				console.log('Is password matched?', isMatchedPassword)
+				
 
 				if (!isMatchedPassword) {
 					throw new Error('Incorrect password')
 				}
-				console.log('Credentials:', credentials)
-				console.log('User:', user)
-				console.log('Is password matched?', isMatchedPassword)
+				
 				return user
 			},
 		}),

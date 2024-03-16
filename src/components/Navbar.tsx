@@ -14,10 +14,16 @@ const Navbar = () => {
 	const [categoryOpen, setCategoryOpen] = useState<boolean>(false)
 	const [top, setTop] = useState<boolean>(true)
 	const [showSearch, setShowSearch] = useState<boolean>(false)
+	const [email, setEmail] = useState<string | null>('')
 
 	const ref = useOutsideClick(() => {
 		setShowSearch(false)
 	})
+
+	const handleLogout = () => {
+		localStorage.removeItem('email')
+		signOut({ callbackUrl: '/authorize' })
+	}
 
 	const handleMenuClick = (menuType: string) => {
 		if ((menuType === 'user' && !categoryOpen) || (menuType === 'category' && !userMenu)) {
@@ -38,6 +44,11 @@ const Navbar = () => {
 		window.addEventListener('scroll', scrollHandler)
 		return () => window.removeEventListener('scroll', scrollHandler)
 	}, [top])
+
+	useEffect(() => {
+		const storedEmail = localStorage.getItem('email')
+		setEmail(storedEmail)
+	}, [])
 
 	useEffect(() => {
 		const handleDocumentKeyDown = (e: KeyboardEvent) => {
@@ -91,7 +102,7 @@ const Navbar = () => {
 						</DropdownMenu>
 					</Dropdown>
 
-					<a href={'#top'} aria-label='Scroll to top'>
+					<Link href={'/'} aria-label='To home page'>
 						<Image
 							src={'/assets/logo.png'}
 							alt='logo'
@@ -100,7 +111,7 @@ const Navbar = () => {
 							sizes='100vw'
 							className='w-auto  max-h-16'
 						/>
-					</a>
+					</Link>
 
 					<Link
 						className='ml-1 p-2 sm:block hidden font-bold text-slate-50 hover:text-slate-300 transition'
@@ -132,7 +143,7 @@ const Navbar = () => {
 						</DropdownMenu>
 					</Dropdown>
 				</div>
-				<div className='flex  w-[50%] sm:w-[40%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%] justify-between items-center'>
+				<div className='flex  w-[50%]  lg:w-[35%] 2xl:w-[25%]  justify-between items-center'>
 					<Button
 						onClick={() => {
 							setShowSearch(!showSearch)
@@ -158,7 +169,9 @@ const Navbar = () => {
 								className=' ml-auto sm:ml-0 font-semibold text-slate-50 bg-transparent'
 								onClick={() => handleMenuClick('user')}>
 								<Image className='p-1 rounded-2xl ' src={'/assets/profile.png'} alt='profile' height={50} width={50} />
-								<span>User {userMenu ? <ArrowDropDown /> : <ArrowLeft />}</span>
+								<span>
+									{email?.split('@')[0]} {userMenu ? <ArrowDropDown /> : <ArrowLeft />}
+								</span>
 							</Button>
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
@@ -179,7 +192,7 @@ const Navbar = () => {
 							<DropdownItem textValue='Log out' key='logout' className='text-[#DD202D]' color='danger'>
 								<Link
 									onClick={() => {
-										signOut({ callbackUrl: '/authorize' })
+										handleLogout
 									}}
 									className='block h-full w-full'
 									href={'/authorize'}

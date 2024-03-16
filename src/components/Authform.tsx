@@ -60,14 +60,15 @@ const Authform = () => {
 
 		if (res && res.ok) {
 			toast.success('Login successfully')
+			localStorage.setItem('email', data.email)
 			setTimeout(() => {
 				router.push('/')
 			}, 2000)
-			console.log(res.status)
 		} else {
 			console.log(res?.error)
 			toast.error('Email or password is incorrect')
 		}
+		console.log(res?.status)
 	}
 
 	return (

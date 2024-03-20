@@ -7,23 +7,20 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@
 import { useState, useEffect } from 'react'
 import SearchInput from './SearchInput'
 import { useOutsideClick } from '@hooks/useOutsideClick'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
 	const [userMenu, setUserMenu] = useState<boolean>(false)
 	const [categoryOpen, setCategoryOpen] = useState<boolean>(false)
 	const [top, setTop] = useState<boolean>(true)
 	const [showSearch, setShowSearch] = useState<boolean>(false)
-	const [email, setEmail] = useState<string | null>('')
+	const { data: session } = useSession()
 
 	const ref = useOutsideClick(() => {
 		setShowSearch(false)
 	})
 
-	const handleLogout = () => {
-		localStorage.removeItem('email')
-		signOut({ callbackUrl: '/authorize' })
-	}
+	
 
 	const handleMenuClick = (menuType: string) => {
 		if ((menuType === 'user' && !categoryOpen) || (menuType === 'category' && !userMenu)) {
@@ -45,10 +42,7 @@ const Navbar = () => {
 		return () => window.removeEventListener('scroll', scrollHandler)
 	}, [top])
 
-	useEffect(() => {
-		const storedEmail = localStorage.getItem('email')
-		setEmail(storedEmail)
-	}, [])
+	
 
 	useEffect(() => {
 		const handleDocumentKeyDown = (e: KeyboardEvent) => {
@@ -170,7 +164,7 @@ const Navbar = () => {
 								onClick={() => handleMenuClick('user')}>
 								<Image className='p-1 rounded-2xl ' src={'/assets/profile.png'} alt='profile' height={50} width={50} />
 								<span>
-									{email?.split('@')[0]} {userMenu ? <ArrowDropDown /> : <ArrowLeft />}
+									{session?.user?.email?.split('@')[0]} {userMenu ? <ArrowDropDown /> : <ArrowLeft />}
 								</span>
 							</Button>
 						</DropdownTrigger>
@@ -192,7 +186,7 @@ const Navbar = () => {
 							<DropdownItem textValue='Log out' key='logout' className='text-[#DD202D]' color='danger'>
 								<Link
 									onClick={() => {
-										handleLogout
+										signOut({ callbackUrl: '/authorize' })
 									}}
 									className='block h-full w-full'
 									href={'/authorize'}

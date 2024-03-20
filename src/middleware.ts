@@ -6,7 +6,7 @@ export default withAuth({
 	},
 })
 
-// See "Matching Paths" below to learn more
+
 export const config = {
 	matcher: ['/search:path*', '/movies', '/favorites', '/', '/series'],
 }

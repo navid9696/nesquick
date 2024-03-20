@@ -3,10 +3,10 @@ import { IGenres, IMovie } from '../../lib/types'
 import { baseImgUrl } from '../../lib/constants'
 import { Modal, ModalContent, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
 import Image from 'next/image'
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
 import YTEmbed from './YTEmbed'
 import { Favorite, FavoriteBorder } from '@mui/icons-material'
+import { useSession } from 'next-auth/react'
 
 interface Props {
 	movie: IMovie
@@ -17,6 +17,16 @@ interface Props {
 const MovieCard = ({ movie, genres, type }: Props) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const [isFavorite, setIsFavorite] = useState(false)
+	const { data: session } = useSession()
+
+	const options = {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${process.env.NEXTAUTH_URL_TOKEN}`,
+		},
+	}
+
 	const genreNames = movie?.genre_ids
 		.map(genreId => {
 			const genre = genres?.find(genre => genre.id === genreId)

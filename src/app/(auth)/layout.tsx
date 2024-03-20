@@ -4,6 +4,7 @@ import '../globals.css'
 
 import { Providers } from '../../../context/Provider'
 import ToasterContext from '../../../context/Toaster'
+import Auth from '../../../context/Auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,8 +21,10 @@ export default function RootLayout({
 	return (
 		<html className='bg-black' lang='en'>
 			<body className={`${inter.className} `}>
-				<ToasterContext />
-				<Providers>{children}</Providers>
+				<Auth>
+					<ToasterContext />
+					<Providers>{children}</Providers>
+				</Auth>
 			</body>
 		</html>
 	)

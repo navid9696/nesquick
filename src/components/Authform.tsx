@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import { Tabs, Tab, Input, Link, Button, Card, CardBody, CardHeader } from '@nextui-org/react'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -60,7 +60,6 @@ const Authform = () => {
 
 		if (res && res.ok) {
 			toast.success('Login successfully')
-			localStorage.setItem('email', data.email)
 			setTimeout(() => {
 				router.push('/')
 			}, 2000)

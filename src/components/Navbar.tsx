@@ -2,7 +2,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Divide as Hamburger } from 'hamburger-react'
-import { ArrowDropDown, ArrowLeft, FavoriteBorderOutlined, SearchOutlined } from '@mui/icons-material'
+import {
+	ArrowDropDown,
+	ArrowLeft,
+	FavoriteBorderOutlined,
+	HomeOutlined,
+	LocalMoviesOutlined,
+	Logout,
+	LogoutOutlined,
+	MovieCreationOutlined,
+	Search,
+	SearchOutlined,
+} from '@mui/icons-material'
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@nextui-org/react'
 import { useState, useEffect } from 'react'
 import SearchInput from './SearchInput'
@@ -19,8 +30,6 @@ const Navbar = () => {
 	const ref = useOutsideClick(() => {
 		setShowSearch(false)
 	})
-
-	
 
 	const handleMenuClick = (menuType: string) => {
 		if ((menuType === 'user' && !categoryOpen) || (menuType === 'category' && !userMenu)) {
@@ -41,8 +50,6 @@ const Navbar = () => {
 		window.addEventListener('scroll', scrollHandler)
 		return () => window.removeEventListener('scroll', scrollHandler)
 	}, [top])
-
-	
 
 	useEffect(() => {
 		const handleDocumentKeyDown = (e: KeyboardEvent) => {
@@ -78,21 +85,21 @@ const Navbar = () => {
 							</button>
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
-							<DropdownItem textValue='HOME' key='HOME'>
-								<Link className='block h-full w-full font-bold' href={'/'} aria-label='HOME'>
-									HOME
-								</Link>
+							<DropdownItem endContent={<HomeOutlined />} href='/' textValue='HOME' key='HOME'>
+								<strong>HOME</strong>
 							</DropdownItem>
-							<DropdownItem textValue='Series' key='series'>
-								<Link className='block h-full w-full' href={'/series'} aria-label='TV Series'>
-									Series
-								</Link>
-							</DropdownItem>
-							<DropdownItem textValue='Movies' key='movies'>
-								<Link className='block h-full w-full' href={'/movies'} aria-label='Movies'>
-									Movies
-								</Link>
-							</DropdownItem>
+							<DropdownItem
+								endContent={<MovieCreationOutlined />}
+								href='/series'
+								textValue='Series'
+								key='search'
+								title='Series'></DropdownItem>
+							<DropdownItem
+								endContent={<LocalMoviesOutlined />}
+								href='/movies'
+								textValue='Movies'
+								key='favorite'
+								title='Movies'></DropdownItem>
 						</DropdownMenu>
 					</Dropdown>
 
@@ -124,16 +131,18 @@ const Navbar = () => {
 							</Button>
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
-							<DropdownItem textValue='Series' key='search'>
-								<Link className='block h-full w-full font-semibold' href={'/series'} aria-label='TV Series'>
-									Series
-								</Link>
-							</DropdownItem>
-							<DropdownItem textValue='Movies' key='favorite'>
-								<Link className='block h-full w-full font-semibold' href={'/movies'} aria-label='Movies'>
-									Movies
-								</Link>
-							</DropdownItem>
+							<DropdownItem
+								endContent={<MovieCreationOutlined />}
+								href='/series'
+								textValue='Series'
+								key='search'
+								title='Series'></DropdownItem>
+							<DropdownItem
+								endContent={<LocalMoviesOutlined />}
+								href='/movies'
+								textValue='Movies'
+								key='favorite'
+								title='Movies'></DropdownItem>
 						</DropdownMenu>
 					</Dropdown>
 				</div>
@@ -170,29 +179,31 @@ const Navbar = () => {
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Static Actions'>
 							<DropdownItem
+								endContent={<Search />}
 								textValue='Search'
 								onClick={() => {
 									setShowSearch(!showSearch)
 								}}
 								className='sm:hidden '
-								key='search'>
-								Search
-							</DropdownItem>
-							<DropdownItem textValue='Favorites' className='sm:hidden' key='favorite'>
-								<Link className='block h-full w-full' href={'/favorites'} aria-label='Favorites'>
-									Favorites
-								</Link>
-							</DropdownItem>
-							<DropdownItem textValue='Log out' key='logout' className='text-[#DD202D]' color='danger'>
-								<Link
-									onClick={() => {
-										signOut({ callbackUrl: '/authorize' })
-									}}
-									className='block h-full w-full'
-									href={'/authorize'}
-									aria-label='Log out'>
-									<strong>Log out</strong>
-								</Link>
+								key='search'
+								title='Search'></DropdownItem>
+							<DropdownItem
+								endContent={<FavoriteBorderOutlined />}
+								textValue='Favorites'
+								className='sm:hidden'
+								key='favorite'
+								href='/favorites'
+								title='Favorites'></DropdownItem>
+							<DropdownItem
+								onClick={() => {
+									signOut({ callbackUrl: '/authorize' })
+								}}
+								endContent={<LogoutOutlined />}
+								textValue='Log out'
+								key='logout'
+								className='text-[#DD202D]'
+								color='danger'>
+								<strong>Log Out</strong>
 							</DropdownItem>
 						</DropdownMenu>
 					</Dropdown>

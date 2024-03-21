@@ -2,10 +2,9 @@
 import Image from 'next/image'
 import { baseImgUrl } from '../../lib/constants'
 import { IGenres, IMovie } from '../../lib/types'
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, NextUIProvider, useDisclosure } from '@nextui-org/react'
-import { Favorite, FavoriteBorder, InfoRounded, PlayArrowOutlined } from '@mui/icons-material'
-import YTEmbed from './YTEmbed'
-import { useState } from 'react'
+import { Button, Modal, ModalContent, useDisclosure } from '@nextui-org/react'
+import { InfoOutlined, PlayArrowOutlined } from '@mui/icons-material'
+import BodyModal from './BodyModal'
 
 interface HeroProps {
 	urlCategory: IMovie
@@ -14,14 +13,14 @@ interface HeroProps {
 
 const Hero = ({ urlCategory, genres }: HeroProps) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
-	const [isFavorite, setIsFavorite] = useState(false)
 
 	const genreNames = urlCategory?.genre_ids
 		.map(genreId => {
-			const genre = genres.find(genre => genre.id === genreId)
+			const genre = genres?.find(genre => genre.id === genreId)
 			return genre ? genre.name : ''
 		})
 		.join(' | ')
+
 	return (
 		<header className='flex -mt-[100px] mb-20 sm:mb-0  h-screen w-full flex-col justify-end sm:justify-start  items-center sm:items-start bg-black/25  '>
 			<div className='absolute top-0 left-0 b -z-10 h-screen w-screen '>
@@ -52,7 +51,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 						Play
 					</Button>
 					<Button onClick={onOpen} className='border-2 border-solid border-black'>
-						<InfoRounded />
+						<InfoOutlined />
 						<span className='sm:block hidden font-extrabold'>More Info</span>
 						<span className='sm:hidden font-extrabold'>Info</span>
 					</Button>
@@ -65,61 +64,7 @@ const Hero = ({ urlCategory, genres }: HeroProps) => {
 						isOpen={isOpen}
 						onOpenChange={onOpenChange}>
 						<ModalContent className='bg-black '>
-							{onClose => (
-								<>
-									<ModalBody>
-										<div className='mt-3 overflow-hidden '>
-											<YTEmbed movieId={urlCategory.id} category={urlCategory.media_type} />
-										</div>
-										<div>
-											<div className='flex justify-between'>
-												<p className='mt-2 text-zinc-100 font-extrabold'>
-													Name:
-													<span className='ml-2 text-zinc-200 text-md font-semibold'>
-														{urlCategory?.title || urlCategory?.name}
-													</span>
-												</p>
-												<Button
-													className='text-red-600'
-													isIconOnly
-													variant='light'
-													onClick={() => {
-														setIsFavorite(!isFavorite)
-													}}>
-													{isFavorite ? <Favorite className='text-3xl' /> : <FavoriteBorder className='text-3xl' />}
-												</Button>
-											</div>
-											<p className='mt-2 text-zinc-100 font-extrabold'>
-												Release Date:
-												<span className='ml-2 text-zinc-200 text-md font-semibold'>
-													{urlCategory?.first_air_date || urlCategory?.release_date}{' '}
-												</span>
-											</p>
-											<p className='mt-2 text-xs text-zinc-300 ml-2'>{urlCategory?.overview}</p>
-
-											<p className='mt-2 text-zinc-100 font-extrabold'>
-												Rating:
-												<span className='ml-2 text-zinc-200 text-sm font-semibold'>
-													{urlCategory?.vote_average.toFixed(1)}
-												</span>
-											</p>
-											<p className='mt-2 text-zinc-100 font-extrabold'>
-												Genres:
-												<span className='ml-2 text-zinc-200 text-sm font-semibold'>{genreNames}</span>
-											</p>
-										</div>
-									</ModalBody>
-									<ModalFooter>
-										<Button
-											className='bg-transparent hover:!bg-red-600 border-red-600 text-red-500 hover:text-black font-semibold'
-											variant='ghost'
-											
-											onPress={onClose}>
-											Close
-										</Button>
-									</ModalFooter>
-								</>
-							)}
+							{onClose => <BodyModal onClose={onClose} movie={urlCategory} genres={genres} />}
 						</ModalContent>
 					</Modal>
 				</div>

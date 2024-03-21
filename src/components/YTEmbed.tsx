@@ -3,7 +3,7 @@ import { YouTubeEmbed } from '@next/third-parties/google'
 import { useEffect, useState } from 'react'
 
 interface YTEmbedProps {
-	movieId: number
+	movieId?: number
 	category?: string
 }
 

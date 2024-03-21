@@ -35,3 +35,5 @@ export const fetchSearch = async (category: string, query: string) => {
 
 	return searched
 }
+
+ 

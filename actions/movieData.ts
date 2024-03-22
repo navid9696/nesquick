@@ -22,12 +22,19 @@ export const fetchGenres = async (category: string) => {
 	return genres
 }
 
-export const fetchTrailers = async (category: string, movieId: number) => {
-	const data = await getApiResponse(`/${category}/${movieId}/videos`)
-	const trailers = data.results
 
-	return trailers
+export const fetchMovieDetails = async (id: number) => {
+	const movieDetails = await getApiResponse(`/movie/${id}?append_to_response=videos`)
+
+	return movieDetails
 }
+export const fetchTvDetails = async (id: number) => {
+	const tvDetails = await getApiResponse(`/tv/${id}?append_to_response=videos`)
+
+	return tvDetails
+}
+
+
 
 export const fetchSearch = async (category: string, query: string) => {
 	const data = await getApiResponse(`/search/${category}?query=${query}`)
@@ -35,5 +42,3 @@ export const fetchSearch = async (category: string, query: string) => {
 
 	return searched
 }
-
- 

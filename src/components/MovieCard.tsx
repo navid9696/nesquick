@@ -5,8 +5,8 @@ import { Modal, ModalContent, useDisclosure } from '@nextui-org/react'
 import Image from 'next/image'
 import BodyModal from './BodyModal'
 
-interface Props {
-	movie?: IMovie
+export interface Props {
+	movie: IMovie
 	genres?: IGenres[]
 	type?: string
 }

@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react'
 import { IGenres, IMovie } from '../../lib/types'
 
 interface Props {
-	movie?: IMovie
+	movie: IMovie
 	genres?: IGenres[]
 	type?: string
 	onClose?: () => void
@@ -19,7 +19,7 @@ interface User {
 
 const BodyModal = ({ movie, genres, type, onClose }: Props) => {
 	const [isFavorite, setIsFavorite] = useState(false)
-	const [user, setUser] = useState<User|null>(null)
+	const [user, setUser] = useState<User | null>(null)
 	const { data: session } = useSession()
 
 	const getUser = async () => {
@@ -36,6 +36,7 @@ const BodyModal = ({ movie, genres, type, onClose }: Props) => {
 
 	useEffect(() => {
 		session ? getUser() : null
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [session])
 
 	const handleFavorites = async () => {
@@ -45,20 +46,32 @@ const BodyModal = ({ movie, genres, type, onClose }: Props) => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ movieId: movie?.id }),
+				body: JSON.stringify({ movieId: movie?.id, movieType: movie?.title ? movie?.title : movie?.name }),
 			})
 			const data = await res.json()
 			setUser(data)
-			setIsFavorite(data.favorites.includes(movie?.id))
+			setIsFavorite(
+				data.favorites.some(favorite =>
+					favorite.id === movie?.id && favorite.movieType === movie?.title ? true : false
+				)
+			)
 		} catch (error) {}
 	}
 
-	const genreNames = movie?.genre_ids
-		.map(genreId => {
-			const genre = genres?.find(genre => genre.id === genreId)
-			return genre ? genre.name : ''
-		})
-		.join(' | ')
+	let genreNames = ''
+
+	if (movie.genre_ids) {
+		genreNames = movie.genre_ids
+			.map(genreId => {
+				const genre = genres?.find(genre => genre.id === genreId)
+				return genre ? genre.name : ''
+			})
+			.join(' | ')
+	} else if (movie.genres) {
+		genreNames = movie.genres.map(genre => genre.name).join(' | ')
+	} else {
+		genreNames = 'Unknown'
+	}
 
 	return (
 		<>

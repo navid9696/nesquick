@@ -1,19 +1,24 @@
 import mongoose from 'mongoose'
 
+const favoritesSchema = new mongoose.Schema({
+	movieId: { type: Number },
+	movieType: { type: String },
+})
+
 const UserSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		unique: true,
-		require: true,
+		required: true,
 	},
 	password: {
 		type: String,
-		require: true,
+		required: true,
 	},
 
 	favorites: {
-		type: [{ type: Number }],
-		default: [],
+		type: [favoritesSchema],
+		
 	},
 })
 

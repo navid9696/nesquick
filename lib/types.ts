@@ -10,6 +10,7 @@ export interface IMovie {
 	poster_path: string
 	media_type: string
 	genre_ids: number[]
+	genres: [{ id: number; name: string }]
 	popularity: number
 	release_date: string
 	first_air_date: string

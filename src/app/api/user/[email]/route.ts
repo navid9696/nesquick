@@ -28,12 +28,20 @@ export const POST = async (req: NextRequest, { params }: { params: { email: stri
 		if (!user) {
 			throw new Error('User not found')
 		}
-		const { movieId } = await req.json()
+		const { movieId, movieType } = await req.json()
 
-		if (!user.favorites.includes(movieId)) {
-			user.favorites.push(movieId)
+		const isFavorite = user.favorites.some(
+			(favorite: { movieId: number; movieType: string }) =>
+				favorite.movieId === movieId && favorite.movieType === movieType
+		)
+
+		if (!isFavorite) {
+			user.favorites.push({ movieId, movieType })
 		} else {
-			user.favorites = user.favorites.filter((id: number) => id !== movieId)
+			user.favorites = user.favorites.filter(
+				(favorite: { movieId: number; movieType: string }) =>
+					favorite.movieId !== movieId || favorite.movieType !== movieType
+			)
 		}
 		await user.save()
 		return new Response(JSON.stringify(user), { status: 200 })

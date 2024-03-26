@@ -28,7 +28,7 @@ const MovieCard = ({ movie, genres, type }: Props) => {
 				</div>
 			)}
 			<Modal
-				className='pb-1 z-50 xl:self-center'
+				className='pb-1 z-50 xl:self-center border-2'
 				hideCloseButton
 				placement='bottom-center'
 				scrollBehavior='outside'

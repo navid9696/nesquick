@@ -4,6 +4,7 @@ import { Button, ModalBody, ModalFooter } from '@nextui-org/react'
 import { Favorite, FavoriteBorder } from '@mui/icons-material'
 import { useSession } from 'next-auth/react'
 import { IGenres, IMovie } from '../../lib/types'
+import { useRouter } from 'next/navigation'
 
 interface Props {
 	movie: IMovie
@@ -17,7 +18,13 @@ interface User {
 	favorites: number[]
 }
 
+export type Favorite = {
+	movieId: number
+	movieType: string
+}
+
 const BodyModal = ({ movie, genres, type, onClose }: Props) => {
+	const router = useRouter()
 	const [isFavorite, setIsFavorite] = useState(false)
 	const [user, setUser] = useState<User | null>(null)
 	const { data: session } = useSession()
@@ -27,7 +34,12 @@ const BodyModal = ({ movie, genres, type, onClose }: Props) => {
 			const res = await fetch(`/api/user/${session?.user?.email}`)
 			const data = await res.json()
 			setUser(data)
-			setIsFavorite(data.favorites.includes(movie?.id))
+			setIsFavorite(
+				data.favorites.some(
+					(favorite: Favorite) =>
+						favorite.movieId === movie?.id && favorite.movieType === (movie?.title ? 'movie' : 'tv')
+				)
+			)
 			console.log(data)
 		} catch (err) {
 			console.log(err)
@@ -46,15 +58,17 @@ const BodyModal = ({ movie, genres, type, onClose }: Props) => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ movieId: movie?.id, movieType: movie?.title ? movie?.title : movie?.name }),
+				body: JSON.stringify({ movieId: movie?.id, movieType: movie?.title ? 'movie' : 'tv' }),
 			})
 			const data = await res.json()
 			setUser(data)
 			setIsFavorite(
-				data.favorites.some(favorite =>
-					favorite.id === movie?.id && favorite.movieType === movie?.title ? true : false
+				data.favorites.some(
+					(favorite: Favorite) =>
+						favorite.movieId === movie?.id && favorite.movieType === (movie?.title ? 'movie' : 'tv')
 				)
 			)
+			router.refresh()
 		} catch (error) {}
 	}
 

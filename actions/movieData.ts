@@ -12,9 +12,7 @@ export const fetchGenres = async (category: string) => {
 	const genres = data.genres
 
 	for (const genre of genres) {
-		const data = await getApiResponse(
-			`/discover/${category}?with_genres=${genre.id}&include_adult=true&sort_by=popularity.desc`
-		)
+		const data = await getApiResponse(`/discover/${category}?with_genres=${genre.id}&sort_by=popularity.desc`)
 
 		genre.movies = data.results
 	}
@@ -22,19 +20,16 @@ export const fetchGenres = async (category: string) => {
 	return genres
 }
 
-
-export const fetchMovieDetails = async (id: number) => {
-	const movieDetails = await getApiResponse(`/movie/${id}?append_to_response=videos`)
+export const fetchMovieDetails = async (id: number, category: string) => {
+	const movieDetails = await getApiResponse(`/${category}/${id}?append_to_response=videos`)
 
 	return movieDetails
 }
-export const fetchTvDetails = async (id: number) => {
-	const tvDetails = await getApiResponse(`/tv/${id}?append_to_response=videos`)
+export const fetchTvDetails = async (id: number, category: string) => {
+	const tvDetails = await getApiResponse(`/${category}/${id}?append_to_response=videos`)
 
 	return tvDetails
 }
-
-
 
 export const fetchSearch = async (category: string, query: string) => {
 	const data = await getApiResponse(`/search/${category}?query=${query}`)

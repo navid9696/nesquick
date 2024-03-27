@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/navid9696/bakeryDAV-POL/tree/main/src/img/logo.png">
+    <img src="src/img/logo.png" alt="Logo" width="100" height="100">
+  </a>
 
-First, run the development server:
+  <h3 align="center">F.P.H.U. DAV-POL Bakery Website</h3>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  <p align="center">
+    <br />
+    <a href="https://www.piekarniabrzeczek.pl/">View site</a>
+  
+  </p>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Welcome to the GitHub repository for the F.P.H.U. DAV-POL Bakery website. This is a single-page website providing information about the bakery and serving as a digital business card. Users can learn various details about the company, including its location on Google Maps, contact information such as phone and email, a link to the Facebook page, and a functional contact form powered by emailJS. The website also utilizes real cookies (not local storage) for certain functionalities.
 
-## Deploy on Vercel
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### Built With
+
+
+[![Used](https://skillicons.dev/icons?i=js,html,scss,gulp,babel,vscode)](https://skillicons.dev)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+
+### Installation
+
+
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/navid9696/bakeryDAV-POL.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run Gulp
+   ```sh
+   gulp
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Dawid Brzęczek - dawidbrzeczek18@gmail.com
+
+Project Link: [https://github.com/navid9696/bakeryDAV-POL](https://github.com/navid9696/bakeryDAV-POL)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+

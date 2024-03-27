@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/navid9696/nesquik/tree/main/public/assets/logo.png">
-    <img src="public/assets/logo.png" alt="Logo" width="100" height="100">
+    <img src="public/assets/logo.png" alt="Logo" width="200" height="100">
   </a>
 
   <h3 align="center">Nesquik, a Netflix clone-like site</h3>

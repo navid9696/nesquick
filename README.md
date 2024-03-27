@@ -2,11 +2,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/navid9696/bakeryDAV-POL/tree/main/src/img/logo.png">
+  <a href="https://github.com/navid9696/nesquik/tree/main/public/assets/logo.png">
     <img src="src/img/logo.png" alt="Logo" width="100" height="100">
   </a>
 
-  <h3 align="center">F.P.H.U. DAV-POL Bakery Website</h3>
+  <h3 align="center">Nesquik, a Netflix clone-like site</h3>
 
   <p align="center">
     <br />
@@ -23,7 +23,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Welcome to the GitHub repository for the F.P.H.U. DAV-POL Bakery website. This is a single-page website providing information about the bakery and serving as a digital business card. Users can learn various details about the company, including its location on Google Maps, contact information such as phone and email, a link to the Facebook page, and a functional contact form powered by emailJS. The website also utilizes real cookies (not local storage) for certain functionalities.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -32,7 +32,7 @@ Welcome to the GitHub repository for the F.P.H.U. DAV-POL Bakery website. This i
 ### Built With
 
 
-[![Used](https://skillicons.dev/icons?i=js,html,scss,gulp,babel,vscode)](https://skillicons.dev)
+[![Used](https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,mongodb,nodejs,vscode)](https://skillicons.dev)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -46,15 +46,15 @@ Welcome to the GitHub repository for the F.P.H.U. DAV-POL Bakery website. This i
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/navid9696/bakeryDAV-POL.git
+   git clone https://github.com/navid9696/nesquik.git
    ```
 2. Install NPM packages
    ```sh
    npm install
    ```
-3. Run Gulp
+3. Run 
    ```sh
-   gulp
+   npm run dev
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -79,7 +79,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Dawid Brzęczek - dawidbrzeczek18@gmail.com
 
-Project Link: [https://github.com/navid9696/bakeryDAV-POL](https://github.com/navid9696/bakeryDAV-POL)
+Project Link: [https://github.com/navid9696/nesquikL](https://github.com/navid9696/nesquik)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

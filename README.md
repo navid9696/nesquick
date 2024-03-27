@@ -27,7 +27,7 @@ Nesquik is a Netflix clone-like website designed to provide users with a familia
 
 Additionally, Nesquik features a robust user authentication system, where users can securely register and log in. The email and hashed password are stored in a MongoDB database along with the user's list of favorite movies, ensuring data security and personalization.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -36,7 +36,7 @@ Additionally, Nesquik features a robust user authentication system, where users 
 
 [![Used](https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,mongodb,nodejs,vscode)](https://skillicons.dev)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -59,7 +59,7 @@ Additionally, Nesquik features a robust user authentication system, where users 
    npm run dev
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- USAGE -->
 ### Usage
@@ -73,7 +73,7 @@ Add or remove movies from your favorites list.
 Log out when finished by clicking the logout button.
 <strong>Email addresses can be in any format, such as "x@x.xx".</strong>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -84,7 +84,7 @@ Log out when finished by clicking the logout button.
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 

@@ -10,7 +10,7 @@
 
   <p align="center">
     <br />
-    <a href="www.nesquik-peach.vercel.app">View site</a>
+    <a href="nesquik-peach.vercel.app">View site</a>
   
   </p>
 </div>

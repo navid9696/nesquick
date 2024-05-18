@@ -125,7 +125,7 @@ const Navbar = () => {
 						<DropdownTrigger>
 							<Button
 								disableRipple
-								className='ml-1 sm:block hidden font-semibold text-slate-50 bg-transparent'
+								className='ml-1 text-medium sm:block hidden font-semibold text-slate-50 bg-transparent'
 								onClick={() => handleMenuClick('category')}>
 								Browse {categoryOpen ? <ArrowDropDown /> : <ArrowLeft />}
 							</Button>
@@ -172,7 +172,7 @@ const Navbar = () => {
 								className=' ml-auto sm:ml-0 font-semibold text-slate-50 bg-transparent'
 								onClick={() => handleMenuClick('user')}>
 								<Image className='p-1 rounded-2xl ' src={'/assets/profile.png'} alt='profile' height={50} width={50} />
-								<span>
+								<span className='text-medium'>
 									{session?.user?.email?.split('@')[0]} {userMenu ? <ArrowDropDown /> : <ArrowLeft />}
 								</span>
 							</Button>

@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/navid9696/nesquik/tree/main/public/assets/logo.png">
+    <img src="public/assets/logo.png" alt="Logo" width="200" height="100">
+  </a>
 
-First, run the development server:
+  <h3 align="center">Nesquik - Netflix clone-like site</h3>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  <p align="center">
+    <br />
+    <a href="https://nesquik-peach.vercel.app">View site</a>
+  
+  </p>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Nesquik is a Netflix clone-like website designed to provide users with a familiar streaming experience. With Nesquik, users can register, log in, browse a wide selection of popular movies and TV shows, search for specific titles, manage their favorites, and more. The site offers a seamless and user-friendly interface, making it easy for users to discover and enjoy their favorite content.
 
-## Deploy on Vercel
+Additionally, Nesquik features a robust user authentication system, where users can securely register and log in. The email and hashed password are stored in a MongoDB database along with the user's list of favorite movies, ensuring data security and personalization.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+### Built With
+
+
+[![Used](https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,mongodb,nodejs,vscode)](https://skillicons.dev)
+
+
+
+
+
+<!-- GETTING STARTED -->
+
+### Installation
+
+
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/navid9696/nesquik.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run 
+   ```sh
+   npm run dev
+   ```
+
+
+
+<!-- USAGE -->
+### Usage
+To use the site, follow these steps:
+
+Register with your email and a password.
+Log in with your registered email and password.
+Browse popular movies and TV shows on the homepage, or navigate to specific genres.
+Search for specific movies using the search feature.
+Add or remove movies from your favorites list.
+Log out when finished by clicking the logout button.
+<strong>Email addresses can be in any format, such as "x@x.xx".</strong>
+
+
+
+
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Dawid Brzęczek - dawidbrzeczek18@gmail.com
+
+Project Link: [https://github.com/navid9696/nesquik](https://github.com/navid9696/nesquik)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
